@@ -14,7 +14,7 @@ const NavbarContainer = styled.div`
             width: 100%;
             height: 100vh;
             position: absolute;
-            top: 42px;
+            top: 38px;
             left: -100%;
             opacity: 1;
             transition: all .5s ease;
