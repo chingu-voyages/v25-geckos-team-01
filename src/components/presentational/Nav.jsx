@@ -5,16 +5,16 @@ const NavbarContainer = styled.div`
     background: linear-gradient( 180deg, rgba( 87,89,171,1 ) 0%, rgba( 13,2,47,1 ) 100% );
     height: fit-content;
     
-    @media( max-width: 750px ) {
+    @media( max-width: 530px ) {
         position: relative;
         
         .nav-menu {
             display: flex;
             flex-direction: column;
             width: 100%;
-            height: 500px;
+            height: 100vh;
             position: absolute;
-            top: 44px;
+            top: 42px;
             left: -100%;
             opacity: 1;
             transition: all .5s ease;
@@ -41,14 +41,16 @@ const Logo = styled.div`
     color: #fff;
     justify-self: start;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 16px;
+    font-weight: bold;
     padding: 10px 20px;
+    letter-spacing: 1px;
 `;
 
 const MenuIcon = styled.div`
     display: none;
     
-    @media( max-width: 750px ) {
+    @media( max-width: 530px ) {
         display: block;
         position: absolute;
         top: 0;
@@ -77,7 +79,7 @@ const NavbarLinks = styled.ul`
             transition: all .2s ease-out;
         }
         
-        @media( max-width: 750px ) {
+        @media( max-width: 530px ) {
             text-align: center;
             padding: 1.5rem;
             width: 100%;
@@ -107,6 +109,7 @@ const Nav = () => {
                     }
                 </MenuIcon>
                 <NavbarLinks className={ menuOpen ? 'nav-menu active' : 'nav-menu not-active' }>
+                    <li>About</li>
                     <li>Sign Up</li>
                     <li>Register</li>
                 </NavbarLinks>
