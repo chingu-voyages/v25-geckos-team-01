@@ -1,4 +1,4 @@
-# v25-geckos-team-01
+# PayItForward (Chingu v25-geckos-team-01) 
 
 # Getting Started with Create React App
 
