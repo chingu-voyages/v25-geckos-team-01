@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const NavbarContainer = styled.div`
-    background: linear-gradient( 180deg, rgba( 87,89,171,1 ) 0%, rgba( 13,2,47,1 ) 100% );
     height: fit-content;
+    background: #3c1874;
     
     @media( max-width: 530px ) {
         position: relative;
@@ -14,7 +14,7 @@ const NavbarContainer = styled.div`
             width: 100%;
             height: 100vh;
             position: absolute;
-            top: 38px;
+            top: 73px;
             left: -100%;
             opacity: 1;
             transition: all .5s ease;
@@ -38,12 +38,12 @@ const NavbarInnerContainer = styled.div`
 `;
 
 const Logo = styled.div`
-    color: #fff;
+    color: white;
     justify-self: start;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: bold;
-    padding: 10px 20px;
+    padding: 25px;
     letter-spacing: 1px;
 `;
 
@@ -58,24 +58,37 @@ const MenuIcon = styled.div`
         transform: translate( -100%, 60% );
         cursor: pointer;
     }
+    
+    .close  {
+        margin-right: 3px;
+        margin-top: 4px;
+    }
+    
+    .open {
+        margin-top: 8px;
+    }
 `;
 
 const NavbarLinks = styled.ul`
     display: flex;
     list-style: none;
     text-align: center;
+    align-items: center;
     
-    li {
+    .li-link {
         color: white;
         text-decoration: none;
-        padding: 15px;
+        margin: 10px;
+        padding: 7px 0;
         cursor: pointer;
-        font-size: .7rem;
+        font-size: .9rem;
         text-transform: uppercase;
         letter-spacing: 2px;
+        font-weight: bold;
+        border-bottom: 1px solid transparent;
         
         &:hover {
-            background-color: rgba(231,231,244,0.3);
+            border-bottom: 1px solid white;
             transition: all .2s ease-out;
         }
         
@@ -91,6 +104,27 @@ const NavbarLinks = styled.ul`
             }
         }
     }
+    
+    .li-buttons {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 5px;
+        width: 105px;
+        padding: 10px 18px;
+        margin: 10px;
+        border: 2px solid white;
+    }
+    
+    .sign-up {
+        color: #3c1874;
+        background: white;
+        font-weight: bold;
+    }
+    
+    .register {
+        color: white;
+    }
 `;
 
 const Nav = () => {
@@ -100,18 +134,18 @@ const Nav = () => {
     return (
         <NavbarContainer>
             <NavbarInnerContainer>
-                <Logo>Chingu V25</Logo>
+                <Logo>PayItForward</Logo>
                 <MenuIcon onClick={ () => setMenuOpen( !menuOpen ) }>
                     { menuOpen ? 
-                        <img src='Close.png' height="18px" alt="menu-icon" />
+                        <img src='Close.png' className="close" height="24px" alt="menu-icon" />
                         :
-                        <img src='Hamburger.png' height="11px" alt="menu-icon" />
+                        <img src='Hamburger.png' className="open" height="20px" alt="menu-icon" />
                     }
                 </MenuIcon>
                 <NavbarLinks className={ menuOpen ? 'nav-menu active' : 'nav-menu not-active' }>
-                    <li>About</li>
-                    <li>Sign Up</li>
-                    <li>Register</li>
+                    <li className="li-link">About</li>
+                    <li className="sign-up li-buttons">Sign Up</li>
+                    <li className="register li-buttons">Register</li>
                 </NavbarLinks>
             </NavbarInnerContainer>
         </NavbarContainer>

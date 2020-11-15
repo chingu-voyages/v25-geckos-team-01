@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import TasksContainer from './../container/TasksContainerConnect.jsx';
+import { SplashSectionOne } from './SplashSectionOne.jsx';
 
 const SplashOuterContainer = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 `;
 
 const SplashInnerContainer = styled.div`
@@ -17,6 +19,7 @@ const SplashInnerContainer = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 40px 0;
     
     span {
         padding: 30px;
@@ -36,8 +39,8 @@ const SplashPage = ( { searchTerm, setSearch } ) => {
     console.log( searchTerm )
     return (
         <SplashOuterContainer>
+            <SplashSectionOne />
             <SplashInnerContainer>
-                <span>Home Page Content Goes Here</span>
                 <input onChange={ e => setSearch( e.target.value ) } />
                 <TasksContainer  />
             </SplashInnerContainer>
