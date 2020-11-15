@@ -2,20 +2,27 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const TaskContainer = styled.div`
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 2.5rem;
-    background-color: rgba(231,231,244,0.7);
+    padding: 20px;
+    width: 300px;
+    border: 1px solid black;
+    margin: 10px;
+    border-radius: 5px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    
+    .description {
+        margin: 10px;
+    }
 `;
 
-const Task = () => {
+const Task = ( { name, organization, description } ) => {
     return (
         <TaskContainer>
-            Task
+            <h4>{ name }</h4>
+            <p>{ organization }</p>
+            <p className="description">{ description }</p>
         </TaskContainer>
     )
 }

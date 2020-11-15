@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import TasksContainer from './../container/TasksContainerConnect.jsx';
 
 const SplashOuterContainer = styled.div`
     width: 100%;
@@ -23,19 +24,23 @@ const SplashInnerContainer = styled.div`
 
     input {
         width: 100%;
+        max-width: 500px;
+        border-radius: 5px;
+        outline: none;
         padding: 10px;
+        border: 1px solid black;
     }
 `;
 
-const SplashPage = ( { searchTerm, setSearch, tasks } ) => {
+const SplashPage = ( { searchTerm, setSearch } ) => {
     console.log( searchTerm )
     return (
         <SplashOuterContainer>
             <SplashInnerContainer>
                 <span>Home Page Content Goes Here</span>
                 <input onChange={ e => setSearch( e.target.value ) } />
+                <TasksContainer  />
             </SplashInnerContainer>
-            
         </SplashOuterContainer>
     )
 }

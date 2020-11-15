@@ -4,7 +4,6 @@ import { setSearch } from './../../actions/index.js';
 
 const mapStateToProps = state => ( {
     searchTerm: state.splash.search,
-    tasks: state.tasks.tasks,
 } )
 
 const mapDispatchToProps = dispatch => {
