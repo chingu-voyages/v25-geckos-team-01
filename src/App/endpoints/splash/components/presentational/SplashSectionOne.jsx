@@ -47,7 +47,7 @@ const SplashSectionOne = () => {
     return (
         <SectionOneContainer>
             <SectionOneInnerContainer>
-                <h1>Connecting talented developers with non-profits</h1>
+                <h1>Connecting talented developers with nonprofits</h1>
                 <button>Learn More</button>
             </SectionOneInnerContainer>
         </SectionOneContainer>

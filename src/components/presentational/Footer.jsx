@@ -6,7 +6,7 @@ const FooterContainer = styled.div`
     bottom: 0;
     width: 100%;
     height: 2.5rem;
-    background-color: rgba(231,231,244,0.7);
+    background-color: rgba(40,55,71,1);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,6 +16,7 @@ const FooterContent = styled.div`
     text-transform: uppercase;
     font-size: .8rem;
     letter-spacing: 1px;
+    color: white;
 `;
 
 const Footer = () => {
