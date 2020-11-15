@@ -15,7 +15,7 @@ const SectionOneContainer = styled.div`
 const SectionOneInnerContainer = styled.div`
     width: 90%;
     max-width: 1100px;
-    padding: 120px 0;
+    padding: 160px 0;
     color: white;
     font-weight: bold;
     display: flex;
@@ -40,6 +40,13 @@ const SectionOneInnerContainer = styled.div`
         text-transform: uppercase;
         letter-spacing: 3px;
         cursor: pointer;
+        transition: all .6s ease;
+
+        &:hover {
+            background-color: white;
+            color: #283747;
+            font-weight: bold;
+        }
     }
 `;
 

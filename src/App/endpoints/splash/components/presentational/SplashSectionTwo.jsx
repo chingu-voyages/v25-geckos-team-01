@@ -34,9 +34,10 @@ const SectionTwoInnerContainer = styled.div`
 `;
 
 const UserBubbleContainer = styled.div`
+    width: 100%;
     display: flex;
     padding: 30px 0;
-    justify-content: center;
+    justify-content: space-around;
     flex-wrap: wrap;
     align-items: center;
 `;

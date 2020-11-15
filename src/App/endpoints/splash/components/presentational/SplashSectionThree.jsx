@@ -38,7 +38,7 @@ const SectionThreeInnerContainer = styled.div`
         text-transform: uppercase;
         letter-spacing: 2px;
         padding: 20px 30px;
-        border-radius: 5px;
+        border-radius: 8px;
         outline: none;
         border: none;
         margin: 10px; 0;

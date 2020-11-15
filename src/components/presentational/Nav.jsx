@@ -114,6 +114,10 @@ const NavbarLinks = styled.ul`
         padding: 10px 18px;
         margin: 10px;
         border: 2px solid white;
+        cursor: pointer;
+        -webkit-box-shadow: 0px 12px 22px -5px rgba(0,0,0,0.75);
+        -moz-box-shadow: 0px 12px 22px -5px rgba(0,0,0,0.75);
+        box-shadow: 0px 12px 22px -5px rgba(0,0,0,0.75);
     }
     
     .sign-up {
@@ -124,6 +128,13 @@ const NavbarLinks = styled.ul`
     
     .register {
         color: white;
+        transition: all .6s ease;
+        
+        &:hover {
+            color: #3c1874;
+            background-color: white;
+            font-weight: bold;
+        }
     }
 `;
 
