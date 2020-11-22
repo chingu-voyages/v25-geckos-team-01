@@ -149,6 +149,7 @@ const LoginRegisterContent = ( { type } ) => {
                     </>
                 }
             </form>
+            { type === 'register' &&
             <div className="role">
                 <div>
                     <input type="radio" name="role" value="Volunteer" onClick={ () => setRole( 'volunteer' ) } checked={ role === 'volunteer' } required />
@@ -159,6 +160,7 @@ const LoginRegisterContent = ( { type } ) => {
                     <label for="Volunteer">Organization</label>
                 </div>
             </div>
+            }
             <Button>{ type === 'login' ? 'Login' : 'Register' }</Button>
             <ContentBottom>
                 { type === 'login' ?
