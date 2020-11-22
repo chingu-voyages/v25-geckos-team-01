@@ -11,7 +11,7 @@ const ContentContainer = styled.div`
     color: black;
     border-radius: 10px;
     padding: 45px;
-    min-width: 300px;
+    min-width: 320px;
     -webkit-box-shadow: 0px 0px 41px -6px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px 0px 41px -6px rgba(0,0,0,0.75);
     box-shadow: 0px 0px 41px -6px rgba(0,0,0,0.75);
@@ -72,25 +72,101 @@ const ContentContainer = styled.div`
       background: white;
       height: 4px;
       top: 1rem;
+    }    
+    
+    .role {
+        display: flex;
+        flex-direction: column;
+        
+        div {
+            margin: 10px 0;
+            
+            label {
+                margin-left: 5px;
+                color: 
+            }
+        }
     }
 `;
 
-const LoginRegisterContent = ( { type } ) => {    
+const Button = styled.button`
+    width: 100%;
+    background: purple;
+    color: white;
+    padding: 15px;
+    outline: none;
+    border: none;
+    -webkit-box-shadow: 10px 14px 20px -13px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 14px 20px -13px rgba(0,0,0,0.75);
+    box-shadow: 10px 14px 20px -13px rgba(0,0,0,0.75);
+    cursor: pointer;
+    border-radius: 3px;
+    margin-top: 15px;
+    font-weight: bold;
+    letter-spacing: 1px;
+`;
+
+const ContentBottom = styled.div`
+    margin: 30px 0 0 0;
+    
+    a {
+        text-decoration: none;
+        font-weight:  bold;
+        color: #662eb9;
+    }
+`;
+
+const LoginRegisterContent = ( { type } ) => {
+    
+    const [ role, setRole ] = useState( 'volunteer' );
+    
     return (
         <ContentContainer>
             <h2>{ type }</h2>
             <form>
                 <div>
                     <input type="text" autoComplete="off" required />
-                    <label>Username</label>
+                    <label>Name</label>
                     <div class="cover"></div>
                 </div>
                 <div>
                     <input type="password" required />
-                    <label htmlFor="password">Password</label>
+                    <label>Password</label>
                     <div class="cover"></div>
                 </div>
+                { type === 'register' &&
+                    <>
+                    <div>
+                        <input type="text" autoComplete="off" required />
+                        <label>Email</label>
+                        <div class="cover"></div>
+                    </div>
+                    <div>
+                        <input type="text" required />
+                        <label>Phone Number</label>
+                        <div class="cover"></div>
+                    </div>
+                    </>
+                }
             </form>
+            <div className="role">
+                <div>
+                    <input type="radio" name="role" value="Volunteer" onClick={ () => setRole( 'volunteer' ) } checked={ role === 'volunteer' } required />
+                    <label for="Volunteer">Volunteer</label>
+                </div>
+                <div>
+                    <input type="radio" name="role" value="Organization" onClick={ () => setRole( 'organization' ) } checked={ role === 'organization' } required />
+                    <label for="Volunteer">Organization</label>
+                </div>
+            </div>
+            <Button>{ type === 'login' ? 'Login' : 'Register' }</Button>
+            <ContentBottom>
+                { type === 'login' ?
+                    <p>Don't have an account? <Link to="register">Register here</Link></p>
+                    :
+                    <p>Already have an account? <Link to="login">Login here</Link></p>
+                }
+            </ContentBottom>
         </ContentContainer>
     )
 }

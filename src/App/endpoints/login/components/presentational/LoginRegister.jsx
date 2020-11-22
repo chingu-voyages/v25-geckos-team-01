@@ -9,8 +9,8 @@ import {
 import { LoginRegisterContent } from './LoginRegisterContent.jsx';
 
 const LoginRegisterContainer = styled.div`
-    width: 100vw;
-    height: 100vh;
+    min-width: 100vw;
+    min-height: 100vh;
     position: absolute;
     top: 0;
     left: 0;
