@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import {
+  BrowserRouter as Router,
+  Link
+} from "react-router-dom";
 
 const NavbarContainer = styled.div`
     height: fit-content;
@@ -120,7 +124,11 @@ const NavbarLinks = styled.ul`
         box-shadow: 0px 12px 22px -5px rgba(0,0,0,0.75);
     }
     
-    .sign-up {
+    a {
+        text-decoration: none;
+    }
+    
+    .login {
         color: #3c1874;
         background: white;
         font-weight: bold;
@@ -145,7 +153,9 @@ const Nav = () => {
     return (
         <NavbarContainer>
             <NavbarInnerContainer>
-                <Logo>PayItForward</Logo>
+                <Link to="/">
+                    <Logo>PayItForward</Logo>
+                </Link>
                 <MenuIcon onClick={ () => setMenuOpen( !menuOpen ) }>
                     { menuOpen ? 
                         <img src='Close.png' className="close" height="24px" alt="menu-icon" />
@@ -155,8 +165,12 @@ const Nav = () => {
                 </MenuIcon>
                 <NavbarLinks className={ menuOpen ? 'nav-menu active' : 'nav-menu not-active' }>
                     <li className="li-link">About</li>
-                    <li className="sign-up li-buttons">Sign Up</li>
-                    <li className="register li-buttons">Register</li>
+                    <Link to="/login">
+                        <li className="login li-buttons">Login</li>
+                    </Link>
+                    <Link to="/register">
+                        <li className="register li-buttons">Register</li>
+                    </Link>
                 </NavbarLinks>
             </NavbarInnerContainer>
         </NavbarContainer>
