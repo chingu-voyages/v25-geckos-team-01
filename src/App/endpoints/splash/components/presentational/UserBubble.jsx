@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
+import {
+  BrowserRouter as Router,
+  Link
+} from "react-router-dom";
+
 const UserBubbleContainer = styled.div`
     padding: .7rem;
     position: relative;
@@ -51,7 +56,9 @@ const UserBubble = ( { type, description } ) => {
             <Content>
                 <h2>{ type }</h2>
                 <p>{ description }</p>
-                <button>{ type === 'Volunteer' ? 'Join us as a volunteer' : 'Join as an organization' }</button>
+                <Link to="register">
+                    <button>{ type === 'Volunteer' ? 'Join us as a volunteer' : 'Join as an organization' }</button>
+                </Link>
             </Content>
         </UserBubbleContainer>
     )

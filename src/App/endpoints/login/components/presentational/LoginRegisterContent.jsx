@@ -116,9 +116,9 @@ const ContentBottom = styled.div`
     }
 `;
 
-const LoginRegisterContent = ( { type } ) => {
+const LoginRegisterContent = ( { type, roleType } ) => {
     
-    const [ role, setRole ] = useState( 'volunteer' );
+    const [ role, setRole ] = useState( roleType );
     
     return (
         <ContentContainer>
@@ -127,24 +127,24 @@ const LoginRegisterContent = ( { type } ) => {
                 <div>
                     <input type="text" autoComplete="off" required />
                     <label>Name</label>
-                    <div class="cover"></div>
+                    <div className="cover"></div>
                 </div>
                 <div>
                     <input type="password" required />
                     <label>Password</label>
-                    <div class="cover"></div>
+                    <div className="cover"></div>
                 </div>
                 { type === 'register' &&
                     <>
                     <div>
                         <input type="text" autoComplete="off" required />
                         <label>Email</label>
-                        <div class="cover"></div>
+                        <div className="cover"></div>
                     </div>
                     <div>
                         <input type="text" required />
                         <label>Phone Number</label>
-                        <div class="cover"></div>
+                        <div className="cover"></div>
                     </div>
                     </>
                 }
@@ -153,11 +153,11 @@ const LoginRegisterContent = ( { type } ) => {
             <div className="role">
                 <div>
                     <input type="radio" name="role" value="Volunteer" onClick={ () => setRole( 'volunteer' ) } checked={ role === 'volunteer' } required />
-                    <label for="Volunteer">Volunteer</label>
+                    <label htmlFor="Volunteer">Volunteer</label>
                 </div>
                 <div>
                     <input type="radio" name="role" value="Organization" onClick={ () => setRole( 'organization' ) } checked={ role === 'organization' } required />
-                    <label for="Volunteer">Organization</label>
+                    <label htmlFor="Volunteer">Organization</label>
                 </div>
             </div>
             }
