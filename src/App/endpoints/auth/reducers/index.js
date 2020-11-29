@@ -15,7 +15,7 @@ function authReducer( auth = {
             localStorage.setItem( 'token', payload.data.token );
             return {
                 ...auth,
-                ...payload,
+                ...payload.data.token,
                 isAuthenticated: true,
                 loading: false,
             }
