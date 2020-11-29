@@ -8,7 +8,7 @@ import {
 import { Nav } from './components/presentational/Nav.jsx';
 import { Footer } from './components/presentational/Footer.jsx';
 import SplashPage from './App/endpoints/splash/components/container/SplashPageConnect.jsx';
-import LoginRegister  from './App/endpoints/login/components/container/LoginRegisterConnect.jsx';
+import { Auth }  from './App/endpoints/auth/components/presentational/Auth.jsx';
 
 function App() {
   return (
@@ -19,8 +19,8 @@ function App() {
                 <Route exact path="/">
                     <SplashPage />
                 </Route>
-                <Route path="/login" component={ () => <LoginRegister type="login"  /> } />
-                <Route pate="/register" component={ () => <LoginRegister type="register"  /> } />
+                <Route path="/login" component={ () => <Auth type="login"  /> } />
+                <Route pate="/register" component={ () => <Auth type="register"  /> } />
             </Switch>
             <Footer />
         </div>

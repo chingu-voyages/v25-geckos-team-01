@@ -1,14 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
-import {
-  BrowserRouter as Router,
-  Link
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 
-import { LoginRegisterContent } from './LoginRegisterContent.jsx';
+import { AuthContent } from './AuthContent.jsx';
 
-const LoginRegisterContainer = styled.div`
+const AuthContainer = styled.div`
     min-width: 100vw;
     min-height: 100vh;
     position: absolute;
@@ -30,9 +26,9 @@ const Close = styled.div`
     content: &#10006;
 `;
 
-const LoginRegister = ( { type, roleType="volunteer" } ) => {    
+const Auth = ( { type, roleType="volunteer" } ) => {   
     return (
-        <LoginRegisterContainer>
+        <AuthContainer>
             <Close>
                 <Link to="/">
                     <svg width="20px" height="20px" viewBox="0 0 20 20" className="ws-icon">
@@ -40,9 +36,9 @@ const LoginRegister = ( { type, roleType="volunteer" } ) => {
                     </svg>
                 </Link>
             </Close>
-            <LoginRegisterContent type={ type } roleType={ roleType } />
-        </LoginRegisterContainer>
+            <AuthContent type={ type } roleType={ roleType } />
+        </AuthContainer>
     )
 }
 
-export { LoginRegister }
+export { Auth }
