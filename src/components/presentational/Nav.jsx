@@ -80,7 +80,7 @@ const NavbarLinks = styled.ul`
         color: white;
         text-decoration: none;
         margin: 10px;
-        padding: 7px 0;
+        padding: 10px 0;
         cursor: pointer;
         font-size: .9rem;
         text-transform: uppercase;
@@ -175,6 +175,9 @@ const Nav = ( { auth, logout } ) => {
                         <>
                         <Link to="/">
                             <li className="li-link">Profile</li>
+                        </Link>
+                        <Link to="/projects">
+                            <li className="li-link">Find a Task</li>
                         </Link>
                         <a onClick={ logout }><li className="register li-buttons">Logout</li></a>
                         </>
