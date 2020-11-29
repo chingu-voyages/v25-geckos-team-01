@@ -1,16 +1,29 @@
+import React, { useEffect } from 'react';
 import './App.scss';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
 } from "react-router-dom";
+import store from './store';
 
 import { Nav } from './components/presentational/Nav.jsx';
 import { Footer } from './components/presentational/Footer.jsx';
 import SplashPage from './App/endpoints/splash/components/container/SplashPageConnect.jsx';
 import { Auth }  from './App/endpoints/auth/components/presentational/Auth.jsx';
+import setAuthToken from './utils/setAuthToken';
+import { loadUser } from './App/endpoints/auth/actions';
 
-function App() {
+if( localStorage.token ) {
+  setAuthToken( localStorage.token );
+}
+
+const App = () => {
+
+  useEffect( () => {
+    store.dispatch( loadUser() );
+  }, [] );
+
   return (
     <Router>
         <div className="App">
