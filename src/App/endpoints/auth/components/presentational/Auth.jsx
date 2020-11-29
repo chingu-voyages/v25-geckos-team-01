@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
 
-import { AuthContent } from './AuthContent.jsx';
+import AuthContent from './../container/AuthContentConnect.jsx';
 
 const AuthContainer = styled.div`
     min-width: 100vw;
