@@ -1,13 +1,32 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { Link, Redirect } from "react-router-dom";
+
+const stretchy = keyframes`
+    0% {
+      transform: translateX(0) scaleX(1);
+    }
+    100% {
+      transform: translateX(100%) scaleX(1);
+    }
+`;
+
+const stretchyRev = keyframes`
+    0% {
+        transform: translateX(100%) scaleX(1);
+      }
+      100% {
+        transform: translateX(0) scaleX(1);
+      }
+`;
 
 const ContentContainer = styled.div`
     background: white;
     color: black;
     border-radius: 10px;
-    padding: 45px;
-    min-width: 320px;
+    padding: 38px 30px;
+    min-width: 350px;
+    margin: 30px 0;
     -webkit-box-shadow: 0px 0px 41px -6px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px 0px 41px -6px rgba(0,0,0,0.75);
     box-shadow: 0px 0px 41px -6px rgba(0,0,0,0.75);
@@ -17,6 +36,12 @@ const ContentContainer = styled.div`
         color: #60107a;
         text-transform: uppercase;
         letter-spacing: 2px;
+    }
+
+    .error {
+        color: red;
+        font-weight: bold;
+        margin-bottom: 20px;
     }
 
     form > div{
@@ -69,25 +94,95 @@ const ContentContainer = styled.div`
       height: 4px;
       top: 1rem;
     }    
-    
+
     .role {
+        position: relative;
         display: flex;
-        flex-direction: column;
+        background: #8997a3;
+        border-radius: 8px;
+        height: 45px;
+        border-radius: 8px;
+        height: 55px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 30px;
         
-        > div {
+        label {
+            width: 48%;
+            height: 45px;
+            margin: 3px;
+            font-size: 14px;
+            text-align: center;
+            align-items: center;
             display: flex;
-            margin: 10px 0;
+            justify-content: center;
+            z-index: 1;
+            user-select: none;
+            cursor: pointer;
+            will-change: transform;
+            transform: translateZ(0px);
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition:
+                transform 125ms ease-in-out,
+                filter 125ms ease-in-out;
             
-            label {
-                margin-left: 5px;
-                color: 
+            &:hover {
+                transform: scale(1.05);
             }
+        }
+        
+        input[type="radio"] {
+            display: none;
+            
+            // static
+            &#t1 ~ .blob {
+                transform-origin: right center;
+            }
+            
+            &#t2 ~ .blob {
+                transform-origin: left center;
+            }
+            
+            // animated
+            &#t1:checked {
+                
+                ~ .blob {
+                background-color: #541479;
+                animation-name: ${ stretchyRev };
+                }
+            }
+          
+            &#t2:checked {
+                
+                ~ .blob {
+                    background: #3d1a75;
+                    animation-name: ${ stretchy };
+                }
+            }
+        }
+        
+        .blob {
+            top: 0;
+            left: 0;
+            width: 48%;
+            height: 45px;
+            position: absolute;
+            z-index: 0;
+            border-radius: 8px;
+            animation-duration: .5s;
+            animation-direction: forwards;
+            animation-iteration-count: 1;
+            animation-fill-mode: forwards;
+            transition: transform 150ms ease, background 150ms ease;
+            margin: 5px;
         }
     }
 
     .submit-btn {
         width: 100%;
-        background: purple;
+        background: #283848;
         color: white;
         padding: 15px;
         outline: none;
@@ -100,6 +195,13 @@ const ContentContainer = styled.div`
         margin-top: 15px;
         font-weight: bold;
         letter-spacing: 1px;
+        transition:
+        transform 125ms ease-in-out,
+        filter 125ms ease-in-out;
+    
+        &:hover {
+            transform: scale(1.02);
+        }
     }
 `;
 
@@ -117,6 +219,7 @@ const AuthContent = ( { type, roleType, auth, register, login } ) => {
     const [ formData, setFormData ] = useState({
         name: '',
         password: '',
+        password2: '',
         email: '',
         phone: '',
         role: 'volunteer',
@@ -125,16 +228,24 @@ const AuthContent = ( { type, roleType, auth, register, login } ) => {
         image: 'test',
     });
 
-    const { name, password, email, phone, role, description, tags, image } =  formData;
+    const [ error, setError ] = useState( '' );
+
+    const { name, password, password2, email, phone, role, description, tags, image } =  formData;
 
     const onChange = e => setFormData( { ...formData, [ e.target.name ]: e.target.value } );
     const onSubmit = async e => {
-        console.log( name, email, role, password, phone, description,tags, image)
         e.preventDefault();
+
+        if ( !name || !password || !password2 || !email ) {
+            return setError( 'Please fill out all required fields' );
+        } else if ( password !== password2 ) {
+            return setError( 'Passwords do not match' );
+        }
+
         if ( type === 'register' ) {
-            register( { name, email, role, password, phone, description, tags, image } );
+            return register( { name, email, role, password, phone, description, tags, image } );
         } else {
-            login( email, password );
+            return login( email, password );
         }
     }
 
@@ -148,6 +259,25 @@ const AuthContent = ( { type, roleType, auth, register, login } ) => {
             <h2>{ type }</h2>
             <form onSubmit={ e => onSubmit( e ) }>
                 { type === 'register' &&
+                    <>
+                    <div className="role">
+                        <label htmlFor="t1">Volunteer</label>
+                        <input id="t1" 
+                               name="role" 
+                               onClick={ () => setFormData( { ...formData, role: 'volunteer' } ) }
+                               defaultChecked={ role === 'volunteer' }
+                               type="radio"
+                               value="volunteer" />
+                        <label htmlFor="t2">Organization</label>
+                        <input id="t2"
+                               name="role" 
+                               onClick={ () => setFormData( { ...formData, role: 'organization' } ) }
+                               defaultChecked={ role === 'organization' }
+                               type="radio"
+                               value="organization" />
+                        <div className="blob"></div>
+                    </div>
+                    <p className="error">{ error }</p>
                     <div>
                         <input className="form-input" 
                             name="name" 
@@ -156,9 +286,10 @@ const AuthContent = ( { type, roleType, auth, register, login } ) => {
                             required
                             onChange={ e => onChange( e ) }
                             value={ name } />
-                        <label className="form-label">Name</label>
+                        <label className="form-label">Name*</label>
                         <div className="cover"></div>
                     </div>
+                    </>
                 }
                 <div>
                     <input className="form-input" 
@@ -168,7 +299,7 @@ const AuthContent = ( { type, roleType, auth, register, login } ) => {
                             required
                             onChange={ e => onChange( e ) }
                             value={ email } />
-                    <label className="form-label">Email</label>
+                    <label className="form-label">Email*</label>
                     <div className="cover"></div>
                 </div>
                 <div>
@@ -178,11 +309,21 @@ const AuthContent = ( { type, roleType, auth, register, login } ) => {
                            required
                            onChange={ e => onChange( e ) }
                            value={ password  } />
-                    <label className="form-label">Password</label>
+                    <label className="form-label">Password*</label>
                     <div className="cover"></div>
                 </div>
                 { type === 'register' &&
                     <>
+                    <div>
+                        <input className="form-input" 
+                            name="password2" 
+                            type="password" 
+                            required
+                            onChange={ e => onChange( e ) }
+                            value={ password2 } />
+                        <label className="form-label">Re-type Password*</label>
+                        <div className="cover"></div>
+                    </div>
                     <div>
                         <input className="form-input" 
                                name="phone" 
@@ -194,7 +335,7 @@ const AuthContent = ( { type, roleType, auth, register, login } ) => {
                         <div className="cover"></div>
                     </div>
                     <div>
-                        <input className="form-input" 
+                        <textarea className="form-input" 
                                name="description" 
                                type="text" 
                                required
@@ -210,12 +351,12 @@ const AuthContent = ( { type, roleType, auth, register, login } ) => {
                                required
                                onChange={ e => onChange( e ) }
                                value={ tags } />
-                        <label className="form-label">Tags</label>
+                        <label className="form-label">Tags (separated by commas)</label>
                         <div className="cover"></div>
                     </div>
                     </>
                 }
-                { type === 'register' &&
+                {/* { type === 'register' &&
                     <div className="role">
                         <div>
                             <input type="radio" 
@@ -236,7 +377,7 @@ const AuthContent = ( { type, roleType, auth, register, login } ) => {
                             <label htmlFor="Volunteer">Organization</label>
                         </div>
                     </div>
-                }
+                } */}
                 <input type="submit" className="submit-btn" value={ type === 'login' ? 'Login' : 'Register' } />
             </form>
             <ContentBottom>
