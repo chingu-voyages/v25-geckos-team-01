@@ -1,10 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
-import {
-  BrowserRouter as Router,
-  Link
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const ContentContainer = styled.div`
     background: white;
@@ -124,16 +120,19 @@ const AuthContent = ( { type, roleType, auth, register } ) => {
         email: '',
         phone: '',
         role: 'volunteer',
+        description: '',
+        tags: '',
+        image: 'test',
     });
 
-    const { name, password, email, phone, role } =  formData;
+    const { name, password, email, phone, role, description, tags, image } =  formData;
 
     const onChange = e => setFormData( { ...formData, [ e.target.name ]: e.target.value } );
     const onSubmit = e => {
+        console.log( name, email, role, password, phone, description,tags, image)
         e.preventDefault();
-        console.log( 'SUBMIT', formData );
+        register( { name, email, role, password, phone, description, tags, image } );
     }
-    console.log( auth, register )
     return (
         <ContentContainer>
             <h2>{ type }</h2>
@@ -180,6 +179,26 @@ const AuthContent = ( { type, roleType, auth, register } ) => {
                                onChange={ e => onChange( e ) }
                                value={ phone } />
                         <label className="form-label">Phone Number</label>
+                        <div className="cover"></div>
+                    </div>
+                    <div>
+                        <input className="form-input" 
+                               name="description" 
+                               type="text" 
+                               required
+                               onChange={ e => onChange( e ) }
+                               value={ description } />
+                        <label className="form-label">Description</label>
+                        <div className="cover"></div>
+                    </div>
+                    <div>
+                        <input className="form-input" 
+                               name="tags" 
+                               type="text" 
+                               required
+                               onChange={ e => onChange( e ) }
+                               value={ tags } />
+                        <label className="form-label">Tags</label>
                         <div className="cover"></div>
                     </div>
                     </>

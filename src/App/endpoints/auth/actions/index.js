@@ -4,14 +4,15 @@ import {
     REGISTER_FAIL,
 } from '../../../../actions/types';
 
-export const register = ( { name, password, email, phone, role } ) => async dispatch => {
+export const register = ( { name, email, role, password, phoneNumber, description, tags, image } ) => async dispatch => {
+    console.log( 'REGISTER' )
     const config = {
         headers: {
             'Content-Type': 'application/json'
         }
     }
 
-    const body = JSON.stringify( { name, password, email, phone, role } );
+    const body = JSON.stringify( { name, email, role, password, phoneNumber, description, tags, image } );
 
     try {
         const res = await axios.post( '/auth/register', body, config );

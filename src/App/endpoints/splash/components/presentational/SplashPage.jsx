@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
 import { SplashSectionOne } from './SplashSectionOne.jsx';
 import { SplashSectionTwo } from './SplashSectionTwo.jsx';
 import { SplashSectionThree } from './SplashSectionThree.jsx';

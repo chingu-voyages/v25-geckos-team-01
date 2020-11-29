@@ -12,7 +12,7 @@ function authReducer( auth = {
     const { type, payload } = action;
     switch( type ) {
         case REGISTER_SUCCESS:
-            localStorage.setItem( 'token', payload.token );
+            localStorage.setItem( 'token', payload.data.token );
             return {
                 ...auth,
                 ...payload,

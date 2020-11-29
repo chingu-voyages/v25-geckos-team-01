@@ -1,16 +1,14 @@
 import { connect } from 'react-redux';
 import { AuthContent } from '../presentational/AuthContent.jsx';
-import { register } from '../../actions';
+import { register } from './../../actions';
 
 const mapStateToProps = state => ( {
     auth: state.auth
 } )
 
-const mapDispatchToProps = dispatch => {
-    return {
-      register: () => dispatch( register ),
-    }
-  }
+const mapDispatchToProps = {
+  register,
+}
 
 
 export default connect( mapStateToProps, mapDispatchToProps )( AuthContent );
