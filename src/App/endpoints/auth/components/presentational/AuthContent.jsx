@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 const ContentContainer = styled.div`
     background: white;
@@ -113,7 +113,7 @@ const ContentBottom = styled.div`
     }
 `;
 
-const AuthContent = ( { type, roleType, auth, register } ) => {
+const AuthContent = ( { type, roleType, auth, register, login } ) => {
     const [ formData, setFormData ] = useState({
         name: '',
         password: '',
@@ -128,24 +128,47 @@ const AuthContent = ( { type, roleType, auth, register } ) => {
     const { name, password, email, phone, role, description, tags, image } =  formData;
 
     const onChange = e => setFormData( { ...formData, [ e.target.name ]: e.target.value } );
-    const onSubmit = e => {
+    const onSubmit = async e => {
         console.log( name, email, role, password, phone, description,tags, image)
         e.preventDefault();
-        register( { name, email, role, password, phone, description, tags, image } );
+        if ( type === 'register' ) {
+            register( { name, email, role, password, phone, description, tags, image } );
+        } else {
+            login( email, password );
+        }
     }
+
+    // Redirect if logged in
+    if( auth.isAuthenticated )  {
+        return <Redirect to="/" />
+    }
+
     return (
         <ContentContainer>
             <h2>{ type }</h2>
             <form onSubmit={ e => onSubmit( e ) }>
+                { type === 'register' &&
+                    <div>
+                        <input className="form-input" 
+                            name="name" 
+                            type="text" 
+                            autoComplete="off" 
+                            required
+                            onChange={ e => onChange( e ) }
+                            value={ name } />
+                        <label className="form-label">Name</label>
+                        <div className="cover"></div>
+                    </div>
+                }
                 <div>
                     <input className="form-input" 
-                           name="name" 
-                           type="text" 
-                           autoComplete="off" 
-                           required
-                           onChange={ e => onChange( e ) }
-                           value={ name } />
-                    <label className="form-label">Name</label>
+                            name="email" 
+                            type="text" 
+                            autoComplete="off" 
+                            required
+                            onChange={ e => onChange( e ) }
+                            value={ email } />
+                    <label className="form-label">Email</label>
                     <div className="cover"></div>
                 </div>
                 <div>
@@ -160,17 +183,6 @@ const AuthContent = ( { type, roleType, auth, register } ) => {
                 </div>
                 { type === 'register' &&
                     <>
-                    <div>
-                        <input className="form-input" 
-                               name="email" 
-                               type="text" 
-                               autoComplete="off" 
-                               required
-                               onChange={ e => onChange( e ) }
-                               value={ email } />
-                        <label className="form-label">Email</label>
-                        <div className="cover"></div>
-                    </div>
                     <div>
                         <input className="form-input" 
                                name="phone" 

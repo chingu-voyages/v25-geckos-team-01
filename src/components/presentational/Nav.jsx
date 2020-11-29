@@ -143,7 +143,7 @@ const NavbarLinks = styled.ul`
     }
 `;
 
-const Nav = () => {
+const Nav = ( { auth, logout } ) => {
     
     const [ menuOpen, setMenuOpen ] = useState( false );
     
@@ -162,12 +162,23 @@ const Nav = () => {
                 </MenuIcon>
                 <NavbarLinks className={ menuOpen ? 'nav-menu active' : 'nav-menu not-active' }>
                     <li className="li-link">About</li>
-                    <Link to="/login">
-                        <li className="login li-buttons">Login</li>
-                    </Link>
-                    <Link to="/register">
-                        <li className="register li-buttons">Register</li>
-                    </Link>
+                    { !auth.isAuthenticated ?
+                        <>
+                        <Link to="/login">
+                            <li className="login li-buttons">Login</li>
+                        </Link>
+                        <Link to="/register">
+                            <li className="register li-buttons">Register</li>
+                        </Link>
+                        </>
+                        :
+                        <>
+                        <Link to="/">
+                            <li className="li-link">Profile</li>
+                        </Link>
+                        <a onClick={ logout }><li className="register li-buttons">Logout</li></a>
+                        </>
+                    }
                 </NavbarLinks>
             </NavbarInnerContainer>
         </NavbarContainer>

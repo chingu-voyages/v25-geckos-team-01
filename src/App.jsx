@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import store from './store';
 
-import { Nav } from './components/presentational/Nav.jsx';
+import Nav from './components/container/NavConnect.jsx';
 import { Footer } from './components/presentational/Footer.jsx';
 import SplashPage from './App/endpoints/splash/components/container/SplashPageConnect.jsx';
 import { Auth }  from './App/endpoints/auth/components/presentational/Auth.jsx';
