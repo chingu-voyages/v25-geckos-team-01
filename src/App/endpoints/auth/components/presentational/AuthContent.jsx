@@ -236,16 +236,16 @@ const AuthContent = ( { type, roleType, auth, register, login } ) => {
     const onSubmit = async e => {
         e.preventDefault();
 
-        if ( !name || !password || !password2 || !email ) {
+        if ( type === 'register' && ( !name || !password || !password2 || !email ) ) {
             return setError( 'Please fill out all required fields' );
-        } else if ( password !== password2 ) {
+        } else if ( type === 'register' && ( password !== password2 ) ) {
             return setError( 'Passwords do not match' );
         }
 
         if ( type === 'register' ) {
-            return register( { name, email, role, password, phone, description, tags, image } );
+            register( { name, email, role, password, phone, description, tags, image } );
         } else {
-            return login( email, password );
+            login( email, password );
         }
     }
 
