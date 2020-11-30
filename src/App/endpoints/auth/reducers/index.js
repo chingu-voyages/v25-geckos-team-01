@@ -21,14 +21,14 @@ function authReducer( auth = {
                 ...auth,
                 isAuthenticated: true,
                 loading: false,
-                user: payload,
+                user: payload.data,
             }
         case REGISTER_SUCCESS:
         case LOGIN_SUCCESS:
             localStorage.setItem( 'token', payload.data.token );
             return {
                 ...auth,
-                ...payload.data.token,
+                token: payload.data.token,
                 isAuthenticated: true,
                 loading: false,
             }

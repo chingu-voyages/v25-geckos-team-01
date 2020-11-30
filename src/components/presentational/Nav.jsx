@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 const NavbarContainer = styled.div`
     height: fit-content;
@@ -144,6 +144,11 @@ const NavbarLinks = styled.ul`
 `;
 
 const Nav = ( { auth, logout } ) => {
+
+    const logoutUser = () => {
+        logout();
+        return <Redirect to="/" />
+    }
     
     const [ menuOpen, setMenuOpen ] = useState( false );
     
@@ -179,7 +184,7 @@ const Nav = ( { auth, logout } ) => {
                         <Link to="/projects">
                             <li className="li-link">Find a Task</li>
                         </Link>
-                        <a onClick={ logout }><li className="register li-buttons">Logout</li></a>
+                        <a onClick={ () => logoutUser() }><li className="register li-buttons">Logout</li></a>
                         </>
                     }
                 </NavbarLinks>

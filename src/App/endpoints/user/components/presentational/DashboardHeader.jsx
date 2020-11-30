@@ -40,9 +40,9 @@ const UserInfo = styled.div`
 `;
 
 const DashboardHeader = ( { auth } ) => {  
-    console.log( auth ) 
+    console.log( 'AUTH', auth ) 
 
-    const { name, role, description, tags } = auth.user.data;
+    const { name, role, description, tags } = auth.user;
 
     return (
         <HeaderOuterContainer>
