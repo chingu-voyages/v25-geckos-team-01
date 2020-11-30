@@ -1,8 +1,13 @@
 import { connect } from 'react-redux';
 import { Tasks } from '../presentational/Tasks.jsx';
+import { loadTasks } from './../../actions';
 
 const mapStateToProps = state => ( {
-    auth: state.auth
+    tasks: state.tasks,
 } )
 
-export default connect( mapStateToProps, null )( Tasks );
+const mapDispatchToProps = {
+  loadTasks
+}
+
+export default connect( mapStateToProps, mapDispatchToProps )( Tasks );
