@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { Link } from "react-router-dom";
 
 const NavbarContainer = styled.div`
     height: fit-content;
@@ -79,7 +80,7 @@ const NavbarLinks = styled.ul`
         color: white;
         text-decoration: none;
         margin: 10px;
-        padding: 7px 0;
+        padding: 10px 0;
         cursor: pointer;
         font-size: .9rem;
         text-transform: uppercase;
@@ -120,7 +121,11 @@ const NavbarLinks = styled.ul`
         box-shadow: 0px 12px 22px -5px rgba(0,0,0,0.75);
     }
     
-    .sign-up {
+    a {
+        text-decoration: none;
+    }
+    
+    .login {
         color: #3c1874;
         background: white;
         font-weight: bold;
@@ -138,14 +143,16 @@ const NavbarLinks = styled.ul`
     }
 `;
 
-const Nav = () => {
+const Nav = ( { auth, logout } ) => {
     
     const [ menuOpen, setMenuOpen ] = useState( false );
     
     return (
         <NavbarContainer>
             <NavbarInnerContainer>
-                <Logo>PayItForward</Logo>
+                <Link to="/">
+                    <Logo>PayItForward</Logo>
+                </Link>
                 <MenuIcon onClick={ () => setMenuOpen( !menuOpen ) }>
                     { menuOpen ? 
                         <img src='Close.png' className="close" height="24px" alt="menu-icon" />
@@ -155,8 +162,26 @@ const Nav = () => {
                 </MenuIcon>
                 <NavbarLinks className={ menuOpen ? 'nav-menu active' : 'nav-menu not-active' }>
                     <li className="li-link">About</li>
-                    <li className="sign-up li-buttons">Sign Up</li>
-                    <li className="register li-buttons">Register</li>
+                    { !auth.isAuthenticated ?
+                        <>
+                        <Link to="/login">
+                            <li className="login li-buttons">Login</li>
+                        </Link>
+                        <Link to="/register">
+                            <li className="register li-buttons">Register</li>
+                        </Link>
+                        </>
+                        :
+                        <>
+                        <Link to="/">
+                            <li className="li-link">Profile</li>
+                        </Link>
+                        <Link to="/projects">
+                            <li className="li-link">Find a Task</li>
+                        </Link>
+                        <a onClick={ logout }><li className="register li-buttons">Logout</li></a>
+                        </>
+                    }
                 </NavbarLinks>
             </NavbarInnerContainer>
         </NavbarContainer>
