@@ -22,13 +22,11 @@ export const loadUser = () => async dispatch => {
 
     try {
         const res = await axios.get( '/account/', config );
-        console.log( 'AUTH', res )
         dispatch( {
             type: USER_LOADED,
             payload: res.data,
         } );
     } catch( err ) {
-        console.log( 'AUTH', err )
         dispatch( {
             type: AUTH_ERROR
         } );
@@ -38,7 +36,6 @@ export const loadUser = () => async dispatch => {
 
 // Register User
 export const register = ( { name, email, role, password, phoneNumber, description, tags, image } ) => async dispatch => {
-    console.log( 'REGISTER' )
     const config = {
         headers: {
             'Content-Type': 'application/json'
@@ -49,14 +46,12 @@ export const register = ( { name, email, role, password, phoneNumber, descriptio
 
     try {
         const res = await axios.post( '/auth/register', body, config );
-        console.log( 'SUCCESS', res );
         dispatch( { 
             type: REGISTER_SUCCESS,
             payload: res.data
         } );
         dispatch( loadUser() );
     } catch( err ) {
-        console.log( 'FAIL', err )
         dispatch( {
             type: REGISTER_FAIL,
         } );
@@ -65,7 +60,6 @@ export const register = ( { name, email, role, password, phoneNumber, descriptio
 
 // Login User
 export const login = ( email, password ) => async dispatch => {
-    console.log( 'LOGIN' )
     const config = {
         headers: {
             'Content-Type': 'application/json'
@@ -75,15 +69,13 @@ export const login = ( email, password ) => async dispatch => {
     const body = JSON.stringify( { email, password } );
 
     try {
-        console.log( 'try')
         const res = await axios.post( '/auth/login', body, config );
-        console.log( 'SUCCESS', res );
         dispatch( { 
             type: LOGIN_SUCCESS,
             payload: res.data
         } );
+        dispatch( loadUser() );
     } catch( err ) {
-        console.log( 'FAIL', err )
         dispatch( {
             type: LOGIN_FAIL,
         } );
@@ -93,6 +85,5 @@ export const login = ( email, password ) => async dispatch => {
 
 // Logout User / Clear Profile
 export const logout = () => dispatch => {
-    console.log( 'LOGOUT' );
     dispatch( { type: LOGOUT } );
 }

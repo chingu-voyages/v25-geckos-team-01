@@ -16,13 +16,6 @@ const SplashOuterContainer = styled.div`
 
 const SplashPage = ( { searchTerm, setSearch } ) => {
     
-    useEffect( () => {
-        axios.get( 'http://localhost:5000/splash' )
-            .then( res =>  {
-                console.log( 'res', res );
-            } );
-    } );
-    
     return (
         <SplashOuterContainer>
             <SplashSectionOne />

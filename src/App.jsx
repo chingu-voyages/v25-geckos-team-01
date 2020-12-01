@@ -23,7 +23,6 @@ if( localStorage.token ) {
 }
 
 const App = ( { auth } ) => {
-  console.log( auth )
 
   useEffect( () => {
     store.dispatch( loadUser() );
