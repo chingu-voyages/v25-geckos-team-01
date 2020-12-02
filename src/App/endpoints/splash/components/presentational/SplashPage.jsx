@@ -20,7 +20,7 @@ const SplashPage = ( { searchTerm, setSearch } ) => {
         <SplashOuterContainer>
             <SplashSectionOne />
             <SplashSectionTwo />
-            <SplashSectionThree setSearch={ setSearch } />
+            {/* <SplashSectionThree setSearch={ setSearch } /> */}
         </SplashOuterContainer>
     )
 }
