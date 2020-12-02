@@ -17,20 +17,22 @@ function authReducer( auth = {
     const { type, payload } = action;
     switch( type ) {
         case USER_LOADED:
+            console.log(  'USER LOADED', payload)
             return {
                 ...auth,
                 isAuthenticated: true,
                 loading: false,
-                user: payload,
+                user: payload.data,
             }
         case REGISTER_SUCCESS:
         case LOGIN_SUCCESS:
             localStorage.setItem( 'token', payload.data.token );
             return {
                 ...auth,
-                ...payload.data.token,
+                token: payload.data.token,
                 isAuthenticated: true,
                 loading: false,
+                user: payload.data,
             }
         case REGISTER_FAIL:
         case AUTH_ERROR:

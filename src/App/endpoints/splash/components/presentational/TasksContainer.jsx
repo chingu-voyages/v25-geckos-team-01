@@ -24,8 +24,8 @@ const TasksContainer = ( { tasks, searchTerm } ) => {
     
     return (
         <TasksOuterContainer>
-            { searchedTasks().length ? 
-                ( searchedTasks().map( ( task, i ) => {
+            { tasks.length ? 
+                ( tasks.map( ( task, i ) => {
                     return <Task key={ 'task ' + i } name={ task.name } organization={ task.organization } description={ task.description } />
                 } ) )
                 :
