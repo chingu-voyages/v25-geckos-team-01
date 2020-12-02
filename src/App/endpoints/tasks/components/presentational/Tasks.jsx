@@ -1,23 +1,32 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Task } from  './../../../../../components/presentational/Task.jsx';
+import { Search } from './Search.jsx';
 
 const TasksContainer = styled.div`
-
 `;
 
-const Tasks = ( { tasks, loadTasks } ) => { 
+const Tasks = ( { tasks, loadTasks, setSearch, search } ) => { 
 
     useEffect( () => {
         loadTasks();
     }, [] );
 
-    console.log( 'tasks', tasks );
+    const searchedTasks = () => {
+        let searched = [];
+        tasks.map( task => {
+            if ( task.title && task.title.toLowerCase().includes( search.toLowerCase() ) ) {
+                searched.push( task );
+            };
+        } );
+        return searched;
+    }
 
     return (
         <TasksContainer>
+            <Search setSearch={ setSearch } />
             { tasks.length ?
-                ( tasks.map( task => {
+                ( searchedTasks().map( task => {
                     return <Task key={ task._id } name={ task.title } organization={ 'test' } description={ task.description } />
                 } ) )
                 : ''

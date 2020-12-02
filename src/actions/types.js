@@ -8,3 +8,4 @@ export const LOGOUT = 'LOGOUT';
 
 export const SET_TASKS = 'SET_TASKS';
 export const REMOVE_TASK = 'REMOVE_TASK';
+export const SET_SEARCH = 'SET_SEARCH';
