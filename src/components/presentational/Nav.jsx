@@ -181,7 +181,7 @@ const Nav = ( { auth, logout } ) => {
                         <Link to="/">
                             <li className="li-link">Profile</li>
                         </Link>
-                        <Link to="/projects">
+                        <Link to="/tasks">
                             <li className="li-link">Find a Task</li>
                         </Link>
                         <a onClick={ () => logoutUser() }><li className="register li-buttons">Logout</li></a>

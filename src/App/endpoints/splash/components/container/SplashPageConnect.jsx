@@ -3,7 +3,7 @@ import { SplashPage } from './../presentational/SplashPage.jsx';
 import { setSearch } from './../../actions/index.js';
 
 const mapStateToProps = state => ( {
-    searchTerm: state.splash.search,
+    searchTerm: state.tasks.search,
 } )
 
 const mapDispatchToProps = dispatch => {

@@ -42,7 +42,7 @@ const App = ( { auth } ) => {
                 </Route>
                 <Route path="/login" component={ () => <Auth type="login"  /> } />
                 <Route path="/register" component={ () => <Auth type="register"  /> } />
-                <Route path="/projects" component={ () => <Tasks /> } />
+                <Route path="/tasks" component={ () => <Tasks /> } />
             </Switch>
             <Footer />
         </div>

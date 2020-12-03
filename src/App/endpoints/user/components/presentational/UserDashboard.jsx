@@ -36,7 +36,7 @@ const UserDashboard = ( { auth } ) => {
         <UserDashboardContainer>
             <DashboardHeader auth={ auth } />
             <Container>
-                <Link to="/projects">
+                <Link to="/tasks">
                     <Button>Explore Projects</Button>
                 </Link>
             </Container>
