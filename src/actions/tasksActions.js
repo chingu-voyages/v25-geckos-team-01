@@ -2,7 +2,7 @@ import axios from 'axios';
 import { 
     SET_TASKS,
     SET_SEARCH
-} from '../../../../actions/types';
+} from './types';
 
 // Load Tasks
 export const loadTasks = () => async dispatch => {
@@ -19,7 +19,7 @@ export const loadTasks = () => async dispatch => {
 
 export const setSearch = ( searchTerm ) => {
     return {
-        type: 'SET_SEARCH',
+        type: SET_SEARCH,
         payload: searchTerm
     }
 }

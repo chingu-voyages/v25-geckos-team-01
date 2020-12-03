@@ -7,8 +7,8 @@ import {
     LOGIN_SUCCESS,
     LOGIN_FAIL,
     LOGOUT
-} from '../../../../actions/types';
-import setAuthToken from './../../../../utils/setAuthToken';
+} from './types';
+import setAuthToken from './../utils/setAuthToken';
 
 // Load User
 export const loadUser = () => async dispatch => {
