@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import { Tasks } from '../presentational/Tasks.jsx';
-import { loadTasks } from './../../actions';
-import { setSearch  } from './../../actions';
+import { loadTasks, setSearch } from './../../../actions/tasksActions';
 
 const mapStateToProps = state => ( {
     tasks: state.tasks.tasksList,

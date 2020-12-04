@@ -8,15 +8,15 @@ import {
 import store from './store';
 import { connect } from 'react-redux';
 
-import Nav from './components/container/NavConnect.jsx';
-import { Footer } from './components/presentational/Footer.jsx';
-import SplashPage from './App/endpoints/splash/components/container/SplashPageConnect.jsx';
-import { Auth }  from './App/endpoints/auth/components/presentational/Auth.jsx';
-import UserDashboard from './App/endpoints/user/components/container/UserDashboardConnect.jsx';
-import Tasks from './App/endpoints/tasks/components/container/TasksConnect.jsx';
+import Nav from './GlobalComponents/container/NavConnect.jsx';
+import { Footer } from './GlobalComponents/presentational/Footer.jsx';
+import SplashPage from './App/splash/container/SplashPageConnect.jsx';
+import { Auth }  from './App/auth/presentational/Auth.jsx';
+import UserDashboard from './App/user/container/UserDashboardConnect.jsx';
+import Tasks from './App/tasks/container/TasksConnect.jsx';
 
 import setAuthToken from './utils/setAuthToken';
-import { loadUser } from './App/endpoints/auth/actions';
+import { loadUser } from './actions/authActions';
 
 if( localStorage.token ) {
   setAuthToken( localStorage.token );

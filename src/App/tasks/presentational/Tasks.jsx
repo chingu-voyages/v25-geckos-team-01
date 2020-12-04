@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { Task } from  './../../../../../components/presentational/Task.jsx';
+import { Task } from  './../../../GlobalComponents/presentational/Task.jsx';
 import { Search } from './Search.jsx';
 
 const TasksContainer = styled.div`

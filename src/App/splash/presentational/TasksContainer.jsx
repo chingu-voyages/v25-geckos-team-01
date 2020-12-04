@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Task } from './../../../../../components/presentational/Task.jsx';
+import { Task } from './../../../GlobalComponents/presentational/Task.jsx';
 
 const TasksOuterContainer = styled.div`
     width: 100%;
@@ -10,17 +10,7 @@ const TasksOuterContainer = styled.div`
     flex-wrap: wrap;
 `;
 
-const TasksContainer = ( { tasks, searchTerm } ) => {
-    
-    const searchedTasks = () => {
-        let searched = [];
-        tasks.map( task => {
-            if ( task.name.toLowerCase().includes( searchTerm.toLowerCase() ) || task.organization.toLowerCase().includes( searchTerm.toLowerCase() ) ) {
-                searched.push( task );
-            };
-        } );
-        return searched;
-    }
+const TasksContainer = ( { tasks } ) => {
     
     return (
         <TasksOuterContainer>

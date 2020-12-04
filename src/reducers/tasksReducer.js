@@ -2,7 +2,7 @@ import {
     SET_TASKS,
     REMOVE_TASK,
     SET_SEARCH,
-} from '../../../../actions/types';
+} from './../actions/types';
 
 function updateObject( oldObject, newValues ) {
     return Object.assign( {}, oldObject, newValues );
