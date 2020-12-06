@@ -20,18 +20,18 @@ export const loadUser = () => async dispatch => {
         headers: { authorization: `Bearer ${ localStorage.token && localStorage.token }` }
     };
 
-    try {
-        const res = await axios.get( '/account/', config );
-        console.log( 'LOAD USER AXIOS', res )
-        dispatch( {
-            type: USER_LOADED,
-            payload: res.data,
-        } );
-    } catch( err ) {
-        console.log( 'LOAD USER AXIOS FAIL', err )
-        dispatch( {
-            type: AUTH_ERROR
-        } );
+    if ( localStorage.token ) {
+        try {
+            const res = await axios.get( '/account/', config );
+            dispatch( {
+                type: USER_LOADED,
+                payload: res.data,
+            } );
+        } catch( err ) {
+            dispatch( {
+                type: AUTH_ERROR
+            } );
+        }
     }
 }
 
