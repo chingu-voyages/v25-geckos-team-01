@@ -13,6 +13,7 @@ import setAuthToken from './../utils/setAuthToken';
 // Load User
 export const loadUser = () => async dispatch => {
     if( localStorage.token ) {
+        console.log( 'LOCAL TOKEN', localStorage.token)
         setAuthToken( localStorage.token );
     }
 
@@ -21,7 +22,7 @@ export const loadUser = () => async dispatch => {
     };
 
     try {
-        const res = await axios.get( '/account/', config );
+        const res = await axios.get( '/account', config );
         dispatch( {
             type: USER_LOADED,
             payload: res.data,

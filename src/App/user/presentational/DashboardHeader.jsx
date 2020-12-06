@@ -22,6 +22,8 @@ const HeaderInnerContainer = styled.div`
 `;
 
 const UserInfo = styled.div`
+    display: flex;
+    flex-direction: column;
 
     .tags {
         display: flex;
@@ -49,14 +51,14 @@ const DashboardHeader = ( { auth } ) => {
             <HeaderInnerContainer>
                 <img src='user.png' />
                 <UserInfo>
-                    <h3>{ name }</h3>
-                    <span>{ role }</span>
-                    <div className="tags">
+                    {/* <h3>{ name }</h3>
+                    <span>{ role }</span> */}
+                    {/* <div className="tags">
                         { tags.length && 
                             ( tags.map( ( tag, i ) => <div key={ 'tag-' + i } className="tag">{ tag }</div> ) )
                         }
-                    </div>
-                    { description && <span>{ description }</span> }
+                    </div> */}
+                    {/* { description && <span>{ description }</span> } */}
                 </UserInfo>
             </HeaderInnerContainer>
         </HeaderOuterContainer>
