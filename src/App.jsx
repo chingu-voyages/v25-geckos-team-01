@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import Nav from './GlobalComponents/container/NavConnect.jsx';
 import { Footer } from './GlobalComponents/presentational/Footer.jsx';
 import SplashPage from './App/splash/container/SplashPageConnect.jsx';
-import { Auth }  from './App/auth/presentational/Auth.jsx';
+import Auth  from './App/auth/container/AuthConnect.jsx';
 import UserDashboard from './App/user/container/UserDashboardConnect.jsx';
 import Tasks from './App/tasks/container/TasksConnect.jsx';
 import Settings from './App/user/container/SettingsConnect.jsx';

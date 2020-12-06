@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { loadUser } from './../../../actions/authActions';
+import { Link, Redirect } from "react-router-dom";
 
 const SettingsContainer = styled.div`
     width: 100%;
@@ -44,41 +44,45 @@ const EditForm = styled.div`
     }
 `;
 
-const Settings = ( { auth } ) => { 
+const Settings = ( { auth, editUser, deleteUser } ) => { 
     console.log( 'SETTINGS', auth.user ) 
 
     const [ isEditing, setIsEditing ] = useState( false );
-    const [ formData, setFormData ] = useState( auth.user );
+    const [ formData, setFormData ] = useState( auth.user && { name: auth.user.name,
+                                                               email: auth.user.email,
+                                                               description: auth.user.description,
+                                                               tags: auth.user.tags ?  auth.user.tags :  '' } );
     const [ error, setError ] = useState( '' );
 
-    const onChange = e => setFormData( { ...formData, [ e.target.name ]: e.target.value } );
+    const onChange = e => {
+        console.log( e.target.name, e.target.value )
+        setFormData( { ...formData, [ e.target.name ]: e.target.value } )
+    };
 
     const onSubmit = async e => {
         e.preventDefault();
+        editUser( { name: formData.name, email: formData.email, description: formData.description } );
         setIsEditing( false );
-        // if ( type === 'register' ) {
-        //     register( { name, email, role, password, phone, description, tags, image } );
-        // } else {
-        //     login( email, password );
-        // }
     }
 
-    console.log( 'form data', formData )
+    // Redirect if user deleted
+    if( !auth.isAuthenticated )  {
+        return <Redirect to="/" />
+    }
 
     return (
         <SettingsContainer>
             <SettingsInnerContainer>
-                { auth.user &&
+                { auth.loading !== true &&
                 ( !isEditing ? 
                     <UserInfo>
                         <span><b>Name: </b>{ auth.user.name }</span>
                         <span><b>Email: </b>{ auth.user.email }</span>
                         <span><b>Role: </b>{ auth.user.role }</span>
-                        <span><b>Phone Number: </b>{ auth.user.phoneNumber }</span>
                         <span><b>Description: </b>{ auth.user.description }</span>
                         {/* <span><b>Tags: </b>{ auth.user.tags }</span> */}
-                        <button className="edit-button" onClick={ () => setIsEditing( true ) }>Edit Profile</button>
-                        <button className="edit-button">Delete Account</button>
+                        {/* <button className="edit-button" onClick={ () => setIsEditing( true ) }>Edit Profile</button> */}
+                        <button onClick={ () => deleteUser() } className="edit-button">Delete Account</button>
                     </UserInfo>
                     :
                     <EditForm>
@@ -113,7 +117,7 @@ const Settings = ( { auth } ) => {
                                     type="text" 
                                     autoComplete="off" 
                                     onChange={ e => onChange( e ) }
-                                    value={ formData.tags } />                        */}
+                                    value={ formData.tags } /> */}
                             <input type="submit" className="edit-button" value={ 'Save' } />
                         </form>
                     </EditForm>

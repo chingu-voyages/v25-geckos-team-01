@@ -205,6 +205,13 @@ const ContentContainer = styled.div`
     }
 `;
 
+const Error = styled.p`
+    font-size: 12px;
+    color: red;
+    font-weight: bold;
+    letter-spacing: .5px;
+`;
+
 const ContentBottom = styled.div`
     margin: 30px 0 0 0;
     
@@ -215,7 +222,7 @@ const ContentBottom = styled.div`
     }
 `;
 
-const AuthContent = ( { type, roleType, auth, register, login } ) => {
+const AuthContent = ( { type, roleType, auth, register, login, resetError } ) => {
     const [ formData, setFormData ] = useState({
         name: '',
         password: '',
@@ -257,6 +264,8 @@ const AuthContent = ( { type, roleType, auth, register, login } ) => {
     return (
         <ContentContainer>
             <h2>{ type }</h2>
+            { auth.error && <Error>{ auth.error }</Error> }
+            { error && <Error>{ error }</Error> }
             <form onSubmit={ e => onSubmit( e ) }>
                 { type === 'register' &&
                     <>
@@ -356,28 +365,6 @@ const AuthContent = ( { type, roleType, auth, register, login } ) => {
                     </div>
                     </>
                 }
-                {/* { type === 'register' &&
-                    <div className="role">
-                        <div>
-                            <input type="radio" 
-                                   name="role" 
-                                   value="Volunteer" 
-                                   onChange={ () => setFormData( { ...formData, role: 'volunteer' } ) } 
-                                   defaultChecked={ role === 'volunteer' } 
-                                   required />
-                            <label htmlFor="Volunteer">Volunteer</label>
-                        </div>
-                        <div>
-                            <input type="radio" 
-                                   name="role" 
-                                   value="Organization" 
-                                   onChange={ () => setFormData( { ...formData, role: 'organization' } ) } 
-                                   defaultChecked={ role === 'organization' } 
-                                   required />
-                            <label htmlFor="Volunteer">Organization</label>
-                        </div>
-                    </div>
-                } */}
                 <input type="submit" className="submit-btn" value={ type === 'login' ? 'Login' : 'Register' } />
             </form>
             <ContentBottom>

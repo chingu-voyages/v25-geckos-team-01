@@ -9,6 +9,7 @@ import {
     DELETE_USER,
     EDIT_USER_SUCCESS,
     EDIT_USER_FAIL,
+    RESET_ERROR,
 } from './../actions/types';
 
 function authReducer( auth = {
@@ -46,8 +47,17 @@ function authReducer( auth = {
         case EDIT_USER_FAIL:
             return {
                 ...auth,
-                error: 'Something went wrong'
+                error: payload.msg,
             }
+        case LOGIN_FAIL:
+            localStorage.removeItem( 'token' );
+            return {
+                ...auth,
+                token: null,
+                isAuthenticated: false,
+                loading: false,
+                error: payload.msg,
+            } 
         case REGISTER_FAIL:
         case AUTH_ERROR:
         case LOGIN_FAIL:
@@ -59,6 +69,11 @@ function authReducer( auth = {
                 token: null,
                 isAuthenticated: false,
                 loading: false, 
+            }
+        case RESET_ERROR:
+            return  {
+                ...auth,
+                error: null,
             }
         default:
             return auth;

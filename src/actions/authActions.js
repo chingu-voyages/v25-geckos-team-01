@@ -10,6 +10,7 @@ import {
     DELETE_USER,
     EDIT_USER_SUCCESS,
     EDIT_USER_FAIL,
+    RESET_ERROR,
 } from './types';
 import setAuthToken from './../utils/setAuthToken';
 
@@ -30,6 +31,7 @@ export const loadUser = () => async dispatch => {
             payload: res.data,
         } );
     } catch( err ) {
+        console.log( 'LOAD USER FAIL', err.response );
         dispatch( {
             type: AUTH_ERROR
         } );
@@ -53,8 +55,12 @@ export const register = ( { name, email, role, password, phoneNumber, descriptio
             type: REGISTER_SUCCESS,
             payload: res.data
         } );
+        dispatch( {
+            type: RESET_ERROR,
+        } );
         dispatch( loadUser() );
     } catch( err ) {
+        console.log( 'REGISTER FAIL', err.reponse );
         dispatch( {
             type: REGISTER_FAIL,
         } );
@@ -62,20 +68,25 @@ export const register = ( { name, email, role, password, phoneNumber, descriptio
 }
 
 // Edit User
-export const editUser = ( { name, email, phoneNumber, description, tags } ) => async dispatch => {
+export const editUser = ( { name, email, description, tags } ) => async dispatch => {
     const config = {
         headers: { authorization: `Bearer ${ localStorage.token && localStorage.token }` }
     }
-
-    const body = JSON.stringify( { name, email, phoneNumber, description, tags } );
+    console.log( 'editUser', name, email, description, tags )
+    const body = JSON.stringify( { name, email, description, tags } );
 
     try {
         const res = await axios.put( '/account/', body, config );
+        console.log( 'EDIT SUCCESS', res )
         dispatch( { 
             type: EDIT_USER_SUCCESS,
             payload: res.data
         } );
+        dispatch( {
+            type: RESET_ERROR,
+        } );
     } catch( err ) {
+        console.log( 'EDIT FAIL', err.reponse );
         dispatch( {
             type: EDIT_USER_FAIL,
         } );
@@ -98,10 +109,15 @@ export const login = ( email, password ) => async dispatch => {
             type: LOGIN_SUCCESS,
             payload: res.data
         } );
+        dispatch( {
+            type: RESET_ERROR,
+        } );
         dispatch( loadUser() );
     } catch( err ) {
+        console.log( 'LOGIN ERROR', err.response );
         dispatch( {
             type: LOGIN_FAIL,
+            payload: err.response.data.Errors[0],
         } );
     }
 }
@@ -121,9 +137,13 @@ export const deleteUser = () => async  dispatch => {
 
     try {
         const res = await axios.delete( '/account/', config );
-        console.log(  res )
+        console.log( 'DELETE USER', res )
         dispatch( { type: DELETE_USER } );
     } catch( err ) {
         alert( 'ERROR' );
     }
+}
+
+export const resetError = () => dispatch =>  {
+    dispatch( { type: RESET_ERROR } );
 }
