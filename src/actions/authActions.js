@@ -23,6 +23,7 @@ export const loadUser = () => async dispatch => {
 
     try {
         const res = await axios.get( '/account', config );
+        console.log( 'LOAD RES', res )
         dispatch( {
             type: USER_LOADED,
             payload: res.data,
