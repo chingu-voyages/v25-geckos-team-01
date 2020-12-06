@@ -17,7 +17,7 @@ function authReducer( auth = {
     const { type, payload } = action;
     switch( type ) {
         case USER_LOADED:
-            console.log(  'USER LOADED', payload)
+            console.log( 'USER LOADED', payload)
             return {
                 ...auth,
                 isAuthenticated: true,

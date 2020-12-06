@@ -44,21 +44,21 @@ const UserInfo = styled.div`
 const DashboardHeader = ( { auth } ) => {  
     console.log( 'AUTH DASHBOARD', auth ) 
 
-    // const { name, role, description, tags } = auth.user;
+    const { name, role, description, tags } = auth.user;
 
     return (
         <HeaderOuterContainer>
             <HeaderInnerContainer>
                 <img src='user.png' />
                 <UserInfo>
-                    {/* <h3>{ name }</h3>
-                    <span>{ role }</span> */}
+                    <h3>{ name }</h3>
+                    <span>{ role }</span>
                     {/* <div className="tags">
                         { tags.length && 
                             ( tags.map( ( tag, i ) => <div key={ 'tag-' + i } className="tag">{ tag }</div> ) )
                         }
                     </div> */}
-                    {/* { description && <span>{ description }</span> } */}
+                    { description && <span>{ description }</span> }
                 </UserInfo>
             </HeaderInnerContainer>
         </HeaderOuterContainer>

@@ -13,17 +13,15 @@ import setAuthToken from './../utils/setAuthToken';
 // Load User
 export const loadUser = () => async dispatch => {
     if( localStorage.token ) {
-        console.log( 'LOCAL TOKEN', localStorage.token)
         setAuthToken( localStorage.token );
     }
 
     const config = {
-        headers: { authorization: `Bearer ${ localStorage.token }` }
+        headers: { authorization: `Bearer ${ localStorage.token && localStorage.token }` }
     };
 
     try {
-        const res = await axios.get( '/account', config );
-        console.log( 'LOAD RES', res )
+        const res = await axios.get( '/account/', config );
         dispatch( {
             type: USER_LOADED,
             payload: res.data,
