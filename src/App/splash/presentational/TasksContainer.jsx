@@ -15,11 +15,11 @@ const TasksContainer = ( { tasks } ) => {
     return (
         <TasksOuterContainer>
             { tasks.length ? 
-                ( tasks.map( ( task, i ) => {
-                    return <Task key={ 'task ' + i } name={ task.name } organization={ task.organization } description={ task.description } />
+                ( tasks.slice(0, 3).map( ( task, i ) => {
+                    return <Task key={ 'task ' + i } name={ task.title } organization={ task.organization } description={ task.description } />
                 } ) )
                 :
-                <span>Sorry, no matching searches</span>
+                ''
             }
         </TasksOuterContainer>
     )

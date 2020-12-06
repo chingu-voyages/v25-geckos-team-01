@@ -13,7 +13,12 @@ const TaskContainer = styled.div`
     align-items: center;
     
     .description {
-        margin: 10px;
+        margin: 10px 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 7; /* number of lines to show */
+        -webkit-box-orient: vertical;
     }
 `;
 
