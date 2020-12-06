@@ -6,6 +6,9 @@ import {
     LOGIN_SUCCESS,
     LOGIN_FAIL,
     LOGOUT,
+    DELETE_USER,
+    EDIT_USER_SUCCESS,
+    EDIT_USER_FAIL,
 } from './../actions/types';
 
 function authReducer( auth = {
@@ -13,6 +16,7 @@ function authReducer( auth = {
     isAuthenticated: null,
     loading: true,
     user: null,
+    error: null,
 }, action ) {
     const { type, payload } = action;
     switch( type ) {
@@ -34,10 +38,21 @@ function authReducer( auth = {
                 loading: false,
                 user: payload.data,
             }
+        case EDIT_USER_SUCCESS:
+            return  {
+                ...auth,
+                user: payload.data,
+            }
+        case EDIT_USER_FAIL:
+            return {
+                ...auth,
+                error: 'Something went wrong'
+            }
         case REGISTER_FAIL:
         case AUTH_ERROR:
         case LOGIN_FAIL:
         case LOGOUT:
+        case DELETE_USER:
             localStorage.removeItem( 'token' );
             return {
                 ...auth,

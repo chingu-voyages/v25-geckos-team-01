@@ -14,6 +14,7 @@ import SplashPage from './App/splash/container/SplashPageConnect.jsx';
 import { Auth }  from './App/auth/presentational/Auth.jsx';
 import UserDashboard from './App/user/container/UserDashboardConnect.jsx';
 import Tasks from './App/tasks/container/TasksConnect.jsx';
+import Settings from './App/user/container/SettingsConnect.jsx';
 
 import setAuthToken from './utils/setAuthToken';
 import { loadUser } from './actions/authActions';
@@ -45,6 +46,7 @@ const App = ( { auth } ) => {
                 <Route path="/login" component={ () => <Auth type="login"  /> } />
                 <Route path="/register" component={ () => <Auth type="register"  /> } />
                 <Route path="/tasks" component={ () => <Tasks /> } />
+                <Route path="/settings" component={ () => <Settings /> } />
             </Switch>
             <Footer />
         </div>
