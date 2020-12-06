@@ -17,6 +17,7 @@ import Tasks from './App/tasks/container/TasksConnect.jsx';
 
 import setAuthToken from './utils/setAuthToken';
 import { loadUser } from './actions/authActions';
+import { loadTasks } from './actions/tasksActions';
 
 if( localStorage.token ) {
   setAuthToken( localStorage.token );
@@ -26,6 +27,7 @@ const App = ( { auth } ) => {
 
   useEffect( () => {
     store.dispatch( loadUser() );
+    store.dispatch( loadTasks() );
   }, [] );
 
   return (

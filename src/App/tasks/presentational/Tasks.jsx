@@ -6,11 +6,7 @@ import { Search } from './Search.jsx';
 const TasksContainer = styled.div`
 `;
 
-const Tasks = ( { tasks, loadTasks, setSearch, search } ) => { 
-
-    useEffect( () => {
-        loadTasks();
-    }, [] );
+const Tasks = ( { tasks, setSearch, search } ) => { 
 
     const searchedTasks = () => {
         let searched = [];
@@ -25,11 +21,11 @@ const Tasks = ( { tasks, loadTasks, setSearch, search } ) => {
     return (
         <TasksContainer>
             <Search setSearch={ setSearch } />
-            { tasks.length ?
+            { searchedTasks().length ?
                 ( searchedTasks().map( task => {
                     return <Task key={ task._id } name={ task.title } organization={ 'test' } description={ task.description } />
                 } ) )
-                : ''
+                : <p>Sorry, no search results</p>
             }
         </TasksContainer>
     )
