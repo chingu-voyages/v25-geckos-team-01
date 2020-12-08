@@ -51,6 +51,7 @@ export const register = ( { name, email, role, password, phoneNumber, descriptio
 
     try {
         const res = await axios.post( '/auth/register', body, config );
+        console.log( 'REGISTER SUCCESS', res.data )
         dispatch( { 
             type: REGISTER_SUCCESS,
             payload: res.data
@@ -60,7 +61,7 @@ export const register = ( { name, email, role, password, phoneNumber, descriptio
         } );
         dispatch( loadUser() );
     } catch( err ) {
-        console.log( 'REGISTER FAIL', err.reponse );
+        console.log( 'REGISTER FAIL', err.response )
         dispatch( {
             type: REGISTER_FAIL,
         } );
@@ -105,6 +106,7 @@ export const login = ( email, password ) => async dispatch => {
 
     try {
         const res = await axios.post( '/auth/login', body, config );
+        console.log( 'LOGIN SUCCESS', res.data )
         dispatch( { 
             type: LOGIN_SUCCESS,
             payload: res.data
@@ -114,7 +116,7 @@ export const login = ( email, password ) => async dispatch => {
         } );
         dispatch( loadUser() );
     } catch( err ) {
-        console.log( 'LOGIN ERROR', err.response );
+        console.log( 'LOGIN FAIL', err.response )
         dispatch( {
             type: LOGIN_FAIL,
             payload: err.response.data.Errors[0],

@@ -334,16 +334,6 @@ const AuthContent = ( { type, roleType, auth, register, login, resetError } ) =>
                         <div className="cover"></div>
                     </div>
                     <div>
-                        <input className="form-input" 
-                               name="phone" 
-                               type="text" 
-                               required
-                               onChange={ e => onChange( e ) }
-                               value={ phone } />
-                        <label className="form-label">Phone Number</label>
-                        <div className="cover"></div>
-                    </div>
-                    <div>
                         <textarea className="form-input" 
                                name="description" 
                                type="text" 
