@@ -110,11 +110,11 @@ const Search = ({ setSearch }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const onSubmit = (e) => {
       e.preventDefault();
-  }
+  };
   return (
     <SearchContainer>
       <h2>Search for your next opportunity</h2>
-      <SearchForm onSubmit={ e => onSubmit(e)}>
+      <SearchForm onSubmit={ e => onSubmit(e) }>
         {/* input is setting local state on change */}
         <input
           type="search"
