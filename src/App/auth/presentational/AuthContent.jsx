@@ -38,12 +38,6 @@ const ContentContainer = styled.div`
         letter-spacing: 2px;
     }
 
-    .error {
-        color: red;
-        font-weight: bold;
-        margin-bottom: 20px;
-    }
-
     form > div{
       position: relative;
     }
@@ -210,6 +204,7 @@ const Error = styled.p`
     color: red;
     font-weight: bold;
     letter-spacing: .5px;
+    margin-bottom: 8px;
 `;
 
 const ContentBottom = styled.div`
@@ -228,16 +223,14 @@ const AuthContent = ( { type, roleType, auth, register, login, resetError } ) =>
         password: '',
         password2: '',
         email: '',
-        phone: '',
         role: 'volunteer',
         description: '',
         tags: '',
-        image: 'test',
     });
 
     const [ error, setError ] = useState( '' );
 
-    const { name, password, password2, email, phone, role, description, tags, image } =  formData;
+    const { name, password, password2, email, role, description, tags } =  formData;
 
     const onChange = e => setFormData( { ...formData, [ e.target.name ]: e.target.value } );
     const onSubmit = async e => {
@@ -250,8 +243,10 @@ const AuthContent = ( { type, roleType, auth, register, login, resetError } ) =>
         }
 
         if ( type === 'register' ) {
-            register( { name, email, role, password, phone, description, tags, image } );
+            setError('')
+            register( { name, email, role, password, description, tags } );
         } else {
+            setError('')
             login( email, password );
         }
     }
@@ -261,10 +256,14 @@ const AuthContent = ( { type, roleType, auth, register, login, resetError } ) =>
         return <Redirect to="/" />
     }
 
+    console.log( 'AUTH', auth )
+
     return (
         <ContentContainer>
             <h2>{ type }</h2>
-            { auth.error && <Error>{ auth.error }</Error> }
+            { auth.error && auth.error.map( ( error, i ) => {
+                return <Error key={'error-' + i }>{ error.msg }</Error> 
+            } ) }
             { error && <Error>{ error }</Error> }
             <form onSubmit={ e => onSubmit( e ) }>
                 { type === 'register' &&
@@ -286,7 +285,6 @@ const AuthContent = ( { type, roleType, auth, register, login, resetError } ) =>
                                value="organization" />
                         <div className="blob"></div>
                     </div>
-                    <p className="error">{ error }</p>
                     <div>
                         <input className="form-input" 
                             name="name" 
@@ -337,7 +335,6 @@ const AuthContent = ( { type, roleType, auth, register, login, resetError } ) =>
                         <textarea className="form-input" 
                                name="description" 
                                type="text" 
-                               required
                                onChange={ e => onChange( e ) }
                                value={ description } />
                         <label className="form-label">Description</label>
@@ -347,7 +344,6 @@ const AuthContent = ( { type, roleType, auth, register, login, resetError } ) =>
                         <input className="form-input" 
                                name="tags" 
                                type="text" 
-                               required
                                onChange={ e => onChange( e ) }
                                value={ tags } />
                         <label className="form-label">Tags (separated by commas)</label>

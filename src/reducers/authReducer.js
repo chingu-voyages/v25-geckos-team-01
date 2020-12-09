@@ -10,6 +10,7 @@ import {
     EDIT_USER_SUCCESS,
     EDIT_USER_FAIL,
     RESET_ERROR,
+    SET_ERROR,
 } from './../actions/types';
 
 function authReducer( auth = {
@@ -74,6 +75,12 @@ function authReducer( auth = {
             return  {
                 ...auth,
                 error: null,
+            }
+        case SET_ERROR:
+            console.log( 'SET ERROR', payload )
+            return {
+                ...auth,
+                error: payload,
             }
         default:
             return auth;

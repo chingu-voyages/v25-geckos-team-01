@@ -11,6 +11,7 @@ import {
     EDIT_USER_SUCCESS,
     EDIT_USER_FAIL,
     RESET_ERROR,
+    SET_ERROR,
 } from './types';
 import setAuthToken from './../utils/setAuthToken';
 
@@ -43,7 +44,8 @@ export const loadUser = () => async dispatch => {
 export const register = ( { name, email, role, password, phoneNumber, description, tags, image } ) => async dispatch => {
     const config = {
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
         }
     }
 
@@ -61,7 +63,11 @@ export const register = ( { name, email, role, password, phoneNumber, descriptio
         } );
         dispatch( loadUser() );
     } catch( err ) {
-        console.log( 'REGISTER FAIL', err.response )
+        console.log( 'REGISTER FAIL', err.response );
+        dispatch( {
+            type: SET_ERROR,
+            payload: err.response.data[ 'Errors' ]
+        } )
         dispatch( {
             type: REGISTER_FAIL,
         } );
@@ -88,6 +94,10 @@ export const editUser = ( { name, email, description, tags } ) => async dispatch
         } );
     } catch( err ) {
         console.log( 'EDIT FAIL', err.reponse );
+        dispatch( {
+            type: SET_ERROR,
+            payload: err.response.data.Errors
+        } )
         dispatch( {
             type: EDIT_USER_FAIL,
         } );
@@ -117,6 +127,10 @@ export const login = ( email, password ) => async dispatch => {
         dispatch( loadUser() );
     } catch( err ) {
         console.log( 'LOGIN FAIL', err.response )
+        dispatch( {
+            type: SET_ERROR,
+            payload: err.response.data.Errors
+        } )
         dispatch( {
             type: LOGIN_FAIL,
             payload: err.response.data.Errors[0],
