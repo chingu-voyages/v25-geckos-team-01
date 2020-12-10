@@ -43,7 +43,6 @@ const UserInfo = styled.div`
 `;
 
 const DashboardHeader = ( { auth } ) => {  
-    console.log( 'AUTH DASHBOARD', auth ) 
 
     const { name, role, description, tags } = auth.user;
 

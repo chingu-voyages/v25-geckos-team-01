@@ -31,13 +31,12 @@ const Button = styled.button`
 `;
 
 const UserDashboard = ( { auth } ) => {  
-    console.log( auth ) 
     return (
         <UserDashboardContainer>
             <DashboardHeader auth={ auth } />
             <Container>
                 <Link to="/tasks">
-                    <Button>Explore Projects</Button>
+                    <Button>Explore Tasks</Button>
                 </Link>
             </Container>
         </UserDashboardContainer>

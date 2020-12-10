@@ -28,6 +28,7 @@ export const loadUser = () => async dispatch => {
     if ( localStorage.token ) {
         try {
             const res = await axios.get( '/account/', config );
+            console.log( 'LOAD USER SUCCESS', res );
             dispatch( {
                 type: USER_LOADED,
                 payload: res.data,
@@ -110,7 +111,7 @@ export const editUser = ( { name, email, description, tags } ) => async dispatch
 export const login = ( email, password ) => async dispatch => {
     const config = {
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/json'
         }
     }
 

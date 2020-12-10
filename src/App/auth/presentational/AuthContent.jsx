@@ -224,13 +224,14 @@ const AuthContent = ( { type, roleType, auth, register, login, resetError } ) =>
         password2: '',
         email: '',
         role: 'volunteer',
+        phoneNumber: '',
         description: '',
         tags: '',
     });
 
     const [ error, setError ] = useState( '' );
 
-    const { name, password, password2, email, role, description, tags } =  formData;
+    const { name, password, password2, email, role, phoneNumber, description, tags } =  formData;
 
     const onChange = e => setFormData( { ...formData, [ e.target.name ]: e.target.value } );
     const onSubmit = async e => {
@@ -244,7 +245,7 @@ const AuthContent = ( { type, roleType, auth, register, login, resetError } ) =>
 
         if ( type === 'register' ) {
             setError('')
-            register( { name, email, role, password, description, tags } );
+            register( { name, email, role, password, phoneNumber, description, tags } );
         } else {
             setError('')
             login( email, password );
@@ -256,14 +257,22 @@ const AuthContent = ( { type, roleType, auth, register, login, resetError } ) =>
         return <Redirect to="/" />
     }
 
-    console.log( 'AUTH', auth )
+    // console.log( 'AUTH', auth )
 
     return (
         <ContentContainer>
             <h2>{ type }</h2>
-            { auth.error && auth.error.map( ( error, i ) => {
-                return <Error key={'error-' + i }>{ error.msg }</Error> 
-            } ) }
+            { auth.error ?
+                ( Array.isArray( auth.error ) ? 
+                    auth.error.map( ( error, i ) => {
+                        return <Error key={'error-' + i }>{ error.msg }</Error> 
+                    } ) 
+                    :
+                    <Error>{ auth.error }</Error> 
+                )
+                :
+                ''
+            }
             { error && <Error>{ error }</Error> }
             <form onSubmit={ e => onSubmit( e ) }>
                 { type === 'register' &&
@@ -332,21 +341,33 @@ const AuthContent = ( { type, roleType, auth, register, login, resetError } ) =>
                         <div className="cover"></div>
                     </div>
                     <div>
-                        <textarea className="form-input" 
+                        <input className="form-input" 
+                               name="phoneNumber" 
+                               type="text" 
+                               required
+                               onChange={ e => onChange( e ) }
+                               value={ phoneNumber } />
+                        <label className="form-label">Phone Number* +1 (555) 555-5555</label>
+                        <div className="cover"></div>
+                    </div>
+                    <div>
+                        <input className="form-input" 
                                name="description" 
                                type="text" 
+                               required
                                onChange={ e => onChange( e ) }
                                value={ description } />
-                        <label className="form-label">Description</label>
+                        <label className="form-label">Description*</label>
                         <div className="cover"></div>
                     </div>
                     <div>
                         <input className="form-input" 
                                name="tags" 
                                type="text" 
+                               required
                                onChange={ e => onChange( e ) }
                                value={ tags } />
-                        <label className="form-label">Tags (separated by commas)</label>
+                        <label className="form-label">Tags* (separated by commas)</label>
                         <div className="cover"></div>
                     </div>
                     </>
@@ -355,9 +376,9 @@ const AuthContent = ( { type, roleType, auth, register, login, resetError } ) =>
             </form>
             <ContentBottom>
                 { type === 'login' ?
-                    <p>Don't have an account? <Link to="register">Register here</Link></p>
+                    <p>Don't have an account? <Link to="register" onClick={ () => resetError('') }>Register here</Link></p>
                     :
-                    <p>Already have an account? <Link to="login">Login here</Link></p>
+                    <p>Already have an account? <Link to="login" onClick={ () => resetError('') }>Login here</Link></p>
                 }
             </ContentBottom>
         </ContentContainer>
