@@ -156,7 +156,9 @@ const Nav = ( { auth, logout } ) => {
         <NavbarContainer>
             <NavbarInnerContainer>
                 <Link to="/">
-                    <Logo>PayItForward</Logo>
+                    <Logo>
+                        <img src='PayItForwardLogo.png' className="open" height="60px" alt="menu-icon" />
+                    </Logo>
                 </Link>
                 <MenuIcon onClick={ () => setMenuOpen( !menuOpen ) }>
                     { menuOpen ? 

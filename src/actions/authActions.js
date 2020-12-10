@@ -25,17 +25,19 @@ export const loadUser = () => async dispatch => {
         headers: { authorization: `Bearer ${ localStorage.token && localStorage.token }` }
     };
 
-    try {
-        const res = await axios.get( '/account/', config );
-        dispatch( {
-            type: USER_LOADED,
-            payload: res.data,
-        } );
-    } catch( err ) {
-        console.log( 'LOAD USER FAIL', err.response );
-        dispatch( {
-            type: AUTH_ERROR
-        } );
+    if ( localStorage.token ) {
+        try {
+            const res = await axios.get( '/account/', config );
+            dispatch( {
+                type: USER_LOADED,
+                payload: res.data,
+            } );
+        } catch( err ) {
+            console.log( 'LOAD USER FAIL', err.response );
+            dispatch( {
+                type: AUTH_ERROR
+            } );
+        }
     }
 }
 
@@ -108,7 +110,7 @@ export const editUser = ( { name, email, description, tags } ) => async dispatch
 export const login = ( email, password ) => async dispatch => {
     const config = {
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/x-www-form-urlencoded'
         }
     }
 
