@@ -4,6 +4,21 @@ import { Task } from  './../../../GlobalComponents/presentational/Task.jsx';
 import { Search } from './Search.jsx';
 
 const TasksContainer = styled.div`
+height: auto;
+padding-bottom: 3%;
+`;
+const TaskList = styled.ul`
+    padding: 25px;     
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    place-items: center;
+    grid-gap: 1rem 0.6rem;
+
+    @media ( max-width: 320px) {
+        padding: 8px;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        
+    }
 `;
 
 const Tasks = ( { tasks, loadTasks, setSearch, search } ) => { 
@@ -25,12 +40,14 @@ const Tasks = ( { tasks, loadTasks, setSearch, search } ) => {
     return (
         <TasksContainer>
             <Search setSearch={ setSearch } />
-            { tasks.length ?
-                ( searchedTasks().map( task => {
-                    return <Task key={ task._id } name={ task.title } organization={ 'test' } description={ task.description } />
-                } ) )
-                : ''
-            }
+            <TaskList>
+                { tasks.length ?
+                    ( searchedTasks().map( task => {
+                        return <Task key={ task._id } name={ task.title } organization={ 'test' } description={ task.description } />
+                    } ) )
+                    : ''
+                }
+            </TaskList>
         </TasksContainer>
     )
 }
