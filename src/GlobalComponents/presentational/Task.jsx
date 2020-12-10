@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const Card = styled.li`
@@ -14,6 +14,7 @@ const Card = styled.li`
   flex-direction: column;
   padding: 20px;
   border: 2px solid #3a4ed5;
+  position: relative;
 
   &:hover,
   &:focus {
@@ -53,15 +54,12 @@ const Card = styled.li`
   }
 
   .description {
-    display: flex;
-    flex-direction: column;
-    max-width: 270px;
-    min-height: 100px;
     font-size: 1.1rem;
-    max-height: 120px;
-    position: relative;
     overflow: hidden;
-  
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical; 
   }
 
    .read-more {
@@ -73,21 +71,27 @@ const Card = styled.li`
     text-align: center; 
     margin: 0; padding: 30px 0;
     /* "transparent" only works here because == rgba(0,0,0,0) */
-  background-image: linear-gradient(to bottom, transparent, #dcdcdc);
-  }
+    background-image: linear-gradient(to bottom, transparent, #dcdcdc);
 
-  .button {
-    font-size: 1.01;
-    text-decoration: none;
+    .button {
+      font-size: 1;
+      text-decoration: none;
+      font-weight: bold;
+      color: #283747;
+    }
   }
 `;
+
 const Task = ({ name, organization, description }) => {
+
+  const [ showButton, setShowButton ] = useState( false );
+
   return (
-    <Card>
+    <Card onMouseOver={ () => setShowButton( true ) } onMouseLeave={ () => setShowButton( false ) }>
       <h4>{name}</h4>
       <p>{organization}</p>
       <p className="description">{description}</p>
-      <p className="read-more"><a href="#" className="button">Read More</a></p>
+      { showButton && <p className="read-more"><a href="#" className="button">Read More</a></p> }
     </Card>
   );
 };

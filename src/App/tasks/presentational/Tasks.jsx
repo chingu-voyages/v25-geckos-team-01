@@ -41,11 +41,11 @@ const Tasks = ( { tasks, loadTasks, setSearch, search } ) => {
         <TasksContainer>
             <Search setSearch={ setSearch } />
             <TaskList>
-                { tasks.length ?
+                { searchedTasks().length ?
                     ( searchedTasks().map( task => {
                         return <Task key={ task._id } name={ task.title } organization={ 'test' } description={ task.description } />
                     } ) )
-                    : ''
+                    : 'Sorry, nothing matched your search'
                 }
             </TaskList>
         </TasksContainer>
