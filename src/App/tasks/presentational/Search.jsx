@@ -27,7 +27,7 @@ const SearchContainer = styled.div`
     }
 `;
 
-const SearchBar = styled.div`
+const SearchBar = styled.form`
         --size: 60px;
         --clr-primary: #3c1874;
         width: var(--size);
@@ -111,16 +111,21 @@ const Search = ( { setSearch } ) => {
 
     const [ searchTerm, setSearchTerm ] = useState( '' );
 
+    const submitSearch = e => {
+        e.preventDefault();
+        setSearch( searchTerm )
+    }
+    
     return (
         <SearchContainer>
             <h2>Search for your next opportunity</h2>  
-            <SearchBar>
+            <SearchBar onSubmit={ e => submitSearch( e ) }>
                 {/* input is setting local state on change */}
                 <input type="search" onChange={ e => setSearchTerm( e.target.value ) } aria-label="search" placeholder="Find a task" />
 
                 {/* setSearch is a redux action, but being passed from Tasks.jsx */}
                 {/* searchTerm is local state being set from the input */}
-                <button onClick={ () => setSearch( searchTerm ) } aria-label="submit search"><FontAwesomeIcon icon={faSearch} /></button>
+                <button type="submit" onClick={ () => setSearch( searchTerm ) } aria-label="submit search"><FontAwesomeIcon icon={faSearch} /></button>
             </SearchBar>
         </SearchContainer>
     )
