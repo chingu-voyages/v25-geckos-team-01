@@ -52,10 +52,10 @@ const SplashSectionThree = () => {
     return (
         <SectionThreeContainer>
             <SectionThreeInnerContainer>
-                <h2>Search For Projects</h2>
+                <h2>Search For Tasks</h2>
                 <TasksContainer  />
                 <Link to='/tasks'>
-                    <button>Browse more projects</button>
+                    <button>Browse more tasks</button>
                 </Link>
             </SectionThreeInnerContainer>
         </SectionThreeContainer>
