@@ -44,7 +44,7 @@ const Logo = styled.div`
     cursor: pointer;
     font-size: 20px;
     font-weight: bold;
-    padding: 25px;
+    padding: 10px 25px;
     letter-spacing: 1px;
 `;
 
