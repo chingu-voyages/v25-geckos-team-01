@@ -2,7 +2,9 @@
 
 ## Overview
 
-This app.....
+![splash page screenshot](https://github.com/chingu-voyages/v25-geckos-team-01/blob/development/public/splashpage.png)
+
+PayItForward connects volunteer developers with non profits. Join as a volunteer to donate  your time  to help nonprofits, or join as an organization and find talented developers to help with your next project. 
 
 # Getting Started with Create React App
 
