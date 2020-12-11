@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link, Redirect } from "react-router-dom";
 
 const TaskContainer = styled.div`
     padding: 20px;
@@ -22,12 +23,14 @@ const TaskContainer = styled.div`
     }
 `;
 
-const Task = ( { name, organization, description } ) => {
+const Task = ( { name, organization, description, id, setCurrentTask } ) => {
+    console.log( 'TASK', id )
     return (
         <TaskContainer>
             <h4>{ name }</h4>
             <p>{ organization }</p>
             <p className="description">{ description }</p>
+            <Link to={ `/tasks/${ id }` }><button onClick={ () => setCurrentTask( id ) }>See More</button></Link>
         </TaskContainer>
     )
 }

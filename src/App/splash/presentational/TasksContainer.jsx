@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Task } from './../../../GlobalComponents/presentational/Task.jsx';
+import Task from './../../../GlobalComponents/container/TaskConnect.jsx';
 
 const TasksOuterContainer = styled.div`
     width: 100%;
@@ -16,7 +16,7 @@ const TasksContainer = ( { tasks } ) => {
         <TasksOuterContainer>
             { tasks.length ? 
                 ( tasks.slice(0, 3).map( ( task, i ) => {
-                    return <Task key={ 'task ' + i } name={ task.title } organization={ task.organization } description={ task.description } />
+                    return <Task key={ task._id } id={ task._id } name={ task.title } organization={ task.organization } description={ task.description } />
                 } ) )
                 :
                 ''
