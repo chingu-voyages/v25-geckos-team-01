@@ -2,7 +2,7 @@
 
 ## Overview
 
-![splash page screenshot](https://github.com/chingu-voyages/v25-geckos-team-01/blob/development/public/splashpage.png)
+<kbd><img src="https://github.com/chingu-voyages/v25-geckos-team-01/blob/development/public/splashpage.png"></kbd>
 
 PayItForward connects volunteer developers with non profits. Join as a volunteer to donate  your time  to help nonprofits, or join as an organization and find talented developers to help with your next project. 
 
