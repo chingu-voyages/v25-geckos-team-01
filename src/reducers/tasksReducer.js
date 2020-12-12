@@ -9,7 +9,7 @@ function updateObject( oldObject, newValues ) {
     return Object.assign( {}, oldObject, newValues );
 };
 
-function tasksReducer( tasks = { search: '',  tasksList: [], currentTask: null }, action ) {
+function tasksReducer( tasks = { search: '',  tasksList: 'fetching', currentTask: null }, action ) {
     const { type, payload } = action;
     switch( type ) {
         case SET_TASKS:

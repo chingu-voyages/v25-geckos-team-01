@@ -11,15 +11,16 @@ const TasksOuterContainer = styled.div`
 `;
 
 const TasksContainer = ( { tasks } ) => {
-    
+    console.log( 'TASKS CONTAINER', tasks )
+
     return (
         <TasksOuterContainer>
-            { tasks.length ? 
+            { tasks === 'fetching' ? 
+                <span>Loading...</span>
+                :
                 ( tasks.slice(0, 3).map( ( task, i ) => {
                     return <Task key={ task._id } id={ task._id } name={ task.title } organization={ task.organization } description={ task.description } />
                 } ) )
-                :
-                ''
             }
         </TasksOuterContainer>
     )

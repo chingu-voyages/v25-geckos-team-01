@@ -9,6 +9,7 @@ import {
 export const loadTasks = () => async dispatch => {
     try {
         const res = await axios.get( '/splash' );
+        console.log( 'LOAD TASKS SUCCESS', res );
         dispatch( {
             type: SET_TASKS,
             payload: res.data,
