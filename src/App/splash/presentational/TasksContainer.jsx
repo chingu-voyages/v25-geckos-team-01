@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Task } from './../../../GlobalComponents/presentational/Task.jsx';
+import Task from './../../../GlobalComponents/container/TaskConnect.jsx';
 
 const TasksOuterContainer = styled.div`
     width: 100%;
@@ -15,11 +15,11 @@ const TasksContainer = ( { tasks } ) => {
     return (
         <TasksOuterContainer>
             { tasks.length ? 
-                ( tasks.map( ( task, i ) => {
-                    return <Task key={ 'task ' + i } name={ task.name } organization={ task.organization } description={ task.description } />
+                ( tasks.slice(0, 3).map( ( task, i ) => {
+                    return <Task key={ task._id } id={ task._id } name={ task.title } organization={ task.organization } description={ task.description } />
                 } ) )
                 :
-                <span>Sorry, no matching searches</span>
+                ''
             }
         </TasksOuterContainer>
     )

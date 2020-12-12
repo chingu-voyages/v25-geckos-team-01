@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from "react-router-dom";
+
 import TasksContainer from './../container/TasksContainerConnect.jsx';
 
 const SectionThreeContainer = styled.div`
@@ -12,7 +14,7 @@ const SectionThreeContainer = styled.div`
 const SectionThreeInnerContainer = styled.div`
     width: 90%;
     max-width: 1100px;
-    padding: 80px 0;
+    padding-bottom: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -46,14 +48,15 @@ const SectionThreeInnerContainer = styled.div`
     }
 `;
 
-const SplashSectionThree = ( { setSearch } ) => {
+const SplashSectionThree = () => {
     return (
         <SectionThreeContainer>
             <SectionThreeInnerContainer>
-                <h2>Search For Projects</h2>
-                <input onChange={ e => setSearch( e.target.value ) } />
+                <h2>Search For Tasks</h2>
                 <TasksContainer  />
-                <button>Browse more projects</button>
+                <Link to='/tasks'>
+                    <button>Browse more tasks</button>
+                </Link>
             </SectionThreeInnerContainer>
         </SectionThreeContainer>
     )

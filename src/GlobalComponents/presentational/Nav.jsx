@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link, Redirect } from "react-router-dom";
+import hamburger  from './../../img/Hamburger.png'
+import logo  from './../../img/PayItForwardLogo.png'
 
 const NavbarContainer = styled.div`
     height: fit-content;
@@ -157,14 +159,14 @@ const Nav = ( { auth, logout } ) => {
             <NavbarInnerContainer>
                 <Link to="/">
                     <Logo>
-                        <img src='PayItForwardLogo.png' className="open" height="60px" alt="menu-icon" />
+                        <img src={ logo } className="open" height="60px" alt="menu-icon" />
                     </Logo>
                 </Link>
                 <MenuIcon onClick={ () => setMenuOpen( !menuOpen ) }>
                     { menuOpen ? 
                         <img src='Close.png' className="close" height="24px" alt="menu-icon" />
                         :
-                        <img src='Hamburger.png' className="open" height="20px" alt="menu-icon" />
+                        <img src={ hamburger } className="open" height="20px" alt="menu-icon" />
                     }
                 </MenuIcon>
                 <NavbarLinks className={ menuOpen ? 'nav-menu active' : 'nav-menu not-active' }>

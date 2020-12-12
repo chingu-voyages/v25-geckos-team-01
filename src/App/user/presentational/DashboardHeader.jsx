@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from "react-router-dom";
 
 const HeaderOuterContainer = styled.div`
     width: 100%;
@@ -42,7 +43,6 @@ const UserInfo = styled.div`
 `;
 
 const DashboardHeader = ( { auth } ) => {  
-    console.log( 'AUTH DASHBOARD', auth ) 
 
     const { name, role, description, tags } = auth.user;
 
@@ -59,6 +59,9 @@ const DashboardHeader = ( { auth } ) => {
                         }
                     </div> */}
                     { description && <span>{ description }</span> }
+                    <Link to='/settings'>
+                        <span>Settings</span>
+                    </Link>
                 </UserInfo>
             </HeaderInnerContainer>
         </HeaderOuterContainer>

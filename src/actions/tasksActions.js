@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { 
     SET_TASKS,
-    SET_SEARCH
+    SET_SEARCH,
+    SET_CURRENT_TASK
 } from './types';
 
 // Load Tasks
@@ -21,5 +22,12 @@ export const setSearch = ( searchTerm ) => {
     return {
         type: SET_SEARCH,
         payload: searchTerm
+    }
+}
+
+export const setCurrentTask = ( taskId ) => {
+    return {
+        type: SET_CURRENT_TASK,
+        payload: taskId
     }
 }

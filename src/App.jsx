@@ -11,12 +11,15 @@ import { connect } from 'react-redux';
 import Nav from './GlobalComponents/container/NavConnect.jsx';
 import { Footer } from './GlobalComponents/presentational/Footer.jsx';
 import SplashPage from './App/splash/container/SplashPageConnect.jsx';
-import { Auth }  from './App/auth/presentational/Auth.jsx';
+import Auth  from './App/auth/container/AuthConnect.jsx';
 import UserDashboard from './App/user/container/UserDashboardConnect.jsx';
 import Tasks from './App/tasks/container/TasksConnect.jsx';
+import Settings from './App/user/container/SettingsConnect.jsx';
+import TaskPage from './App/tasks/container/TaskPageConnect.jsx';
 
 import setAuthToken from './utils/setAuthToken';
 import { loadUser } from './actions/authActions';
+import { loadTasks } from './actions/tasksActions';
 
 if( localStorage.token ) {
   setAuthToken( localStorage.token );
@@ -26,6 +29,7 @@ const App = ( { auth } ) => {
 
   useEffect( () => {
     store.dispatch( loadUser() );
+    store.dispatch( loadTasks() );
   }, [] );
 
   return (
@@ -42,8 +46,10 @@ const App = ( { auth } ) => {
                 </Route>
                 <Route path="/login" component={ () => <Auth type="login"  /> } />
                 <Route path="/register" component={ () => <Auth type="register"  /> } />
-                <Route path="/tasks" component={ () => <Tasks /> } />
-            </Switch>
+                <Route exact path="/tasks" component={ () => <Tasks /> } />
+                <Route path="/settings" component={ () => <Settings /> } />
+                <Route path="/tasks/:taskId" component={ () => <TaskPage /> } />
+              </Switch>
             <Footer />
         </div>
     </Router>
