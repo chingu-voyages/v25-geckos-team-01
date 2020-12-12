@@ -16,6 +16,7 @@ import UserDashboard from './App/user/container/UserDashboardConnect.jsx';
 import Tasks from './App/tasks/container/TasksConnect.jsx';
 import Settings from './App/user/container/SettingsConnect.jsx';
 import TaskPage from './App/tasks/container/TaskPageConnect.jsx';
+import NewTask from './App/tasks/container/NewTaskConnect.jsx';
 
 import setAuthToken from './utils/setAuthToken';
 import { loadUser } from './actions/authActions';
@@ -49,6 +50,7 @@ const App = ( { auth } ) => {
                 <Route exact path="/tasks" component={ () => <Tasks /> } />
                 <Route path="/settings" component={ () => <Settings /> } />
                 <Route path="/tasks/:taskId" component={ () => <TaskPage /> } />
+                <Route path="/task/newtask" component={ () => <NewTask /> } />
               </Switch>
             <Footer />
         </div>

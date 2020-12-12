@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
 import { DashboardHeader } from './DashboardHeader.jsx';
@@ -9,11 +9,19 @@ const UserDashboardContainer = styled.div`
     justify-content: center;
 `;
 
-const Container = styled.div`
+const UserOuterContainer = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+`;
+
+const UserInnerContainer = styled.div`
     width: 100%;
     max-width: 1000px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    text-align: center;
 `;
 
 const Button = styled.button`
@@ -28,17 +36,25 @@ const Button = styled.button`
     border-radius: 3px;
     margin: 20px;
     cursor: pointer;
+    border-radius: 5px;
 `;
 
 const UserDashboard = ( { auth } ) => {  
+
     return (
         <UserDashboardContainer>
             <DashboardHeader auth={ auth } />
-            <Container>
-                <Link to="/tasks">
-                    <Button>Explore Tasks</Button>
-                </Link>
-            </Container>
+            <UserOuterContainer>
+                <UserInnerContainer>
+                    <p>You don't have any tasks listed yet.</p>
+                    <Link to="/task/newtask">
+                        <Button>Post a task</Button>
+                    </Link>
+                    <Link to="/tasks">
+                        <Button>Explore Tasks</Button>
+                    </Link>
+                </UserInnerContainer>
+            </UserOuterContainer>
         </UserDashboardContainer>
     )
 }
