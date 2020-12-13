@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
 import { DashboardHeader } from './DashboardHeader.jsx';
+import { Task } from './../../../GlobalComponents/presentational/Task.jsx';
 
 const UserDashboardContainer = styled.div`
     display: flex;
@@ -39,17 +40,32 @@ const Button = styled.button`
     border-radius: 5px;
 `;
 
-const UserDashboard = ( { auth } ) => {  
+const UserDashboard = ( { auth, tasks } ) => { 
+    
+    const orgTasks = () => {
+        return tasks.filter( task => task.postedBy === auth.user.id );
+    }
 
     return (
         <UserDashboardContainer>
             <DashboardHeader auth={ auth } />
             <UserOuterContainer>
                 <UserInnerContainer>
-                    <p>You don't have any tasks listed yet.</p>
-                    <Link to="/task/newtask">
-                        <Button>Post a task</Button>
-                    </Link>
+                    { tasks === 'fetching' ?
+                        <p>Loading...</p>
+                        :
+                        ( orgTasks().length  ?
+                            ( orgTasks().map( task => <Task /> )  )
+                            // <p>Task  list</p>
+                            :
+                            <p>You don't have any tasks listed yet.</p>
+                        )
+                    }
+                    { auth.user.role === 'organization' && 
+                        <Link to="/task/newtask">
+                            <Button>Post a task</Button>
+                        </Link>
+                    }
                     <Link to="/tasks">
                         <Button>Explore Tasks</Button>
                     </Link>

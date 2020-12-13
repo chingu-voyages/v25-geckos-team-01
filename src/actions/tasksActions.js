@@ -45,10 +45,11 @@ export const addNewTask = ( { title, description, skillsRequired, location, task
     const config = {
         headers: { 
             "authorization": `Bearer ${ localStorage.token && localStorage.token }`,
+            'Content-Type': 'application/json',
             "Access-Control-Allow-Origin": '*' }
     };
 
-    const body = JSON.stringify( { title, description, skillsRequired, location, taskEnd } );
+    const body = JSON.stringify( { title, description, skillsRequired, location, taskEnd, status: 'open' } );
 
     console.log( 'BODY', body )
 

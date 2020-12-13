@@ -10,7 +10,7 @@ const Tasks = ( { tasks, setSearch, search } ) => {
 
     const searchedTasks = () => {
         let searched = [];
-        tasks.map( task => {
+        tasks !== 'fetching' && tasks.map( task => {
             if ( task.title && task.title.toLowerCase().includes( search.toLowerCase() ) ) {
                 searched.push( task );
             };

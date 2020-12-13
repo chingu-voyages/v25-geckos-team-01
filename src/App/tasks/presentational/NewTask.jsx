@@ -72,7 +72,7 @@ const NewTask = ( { auth, addNewTask } ) => {
         addNewTask( { title, description, skillsRequired, location, taskEnd } );
     }
 
-    if( !auth.isAuthenticated )  {
+    if( !auth.isAuthenticated || auth.user.role === 'volunteer' )  {
         return <Redirect to="/" />
     }
 

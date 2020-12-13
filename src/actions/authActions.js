@@ -22,7 +22,9 @@ export const loadUser = () => async dispatch => {
     }
 
     const config = {
-        headers: { authorization: `Bearer ${ localStorage.token && localStorage.token }` }
+        headers: { 
+            'Authorization': `Bearer: ${ localStorage.token && localStorage.token }`,
+        }
     };
 
     if ( localStorage.token ) {
