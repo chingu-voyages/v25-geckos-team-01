@@ -18,7 +18,7 @@ const TasksContainer = ( { tasks } ) => {
             { tasks === 'fetching' ? 
                 <span>Loading...</span>
                 :
-                ( tasks.length ? 
+                ( Array.isArray( tasks ) && tasks.length ? 
                     tasks.slice(0, 3).map( ( task, i ) => {
                         return <Task key={ task._id } id={ task._id } name={ task.title } organization={ task.organization } description={ task.description } />
                     } )
