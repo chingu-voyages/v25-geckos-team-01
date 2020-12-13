@@ -9,7 +9,9 @@ import {
 export const loadTasks = () => async dispatch => {
     const config = {
         headers: {
-            "Accept":"application/json"
+            "Accept":"application/json",
+            'Content-Type': 'application/json;charset=UTF-8',
+            "Access-Control-Allow-Origin": "*",
         }
     }
 
