@@ -7,16 +7,8 @@ import {
 
 // Load Tasks
 export const loadTasks = () => async dispatch => {
-    const config = {
-        headers: {
-            "Accept":"application/json",
-            'Content-Type': 'application/json;charset=UTF-8',
-            "Access-Control-Allow-Origin": "*",
-        }
-    }
-
     try {
-        const res = await axios.get( '/splash', config );
+        const res = await axios.get( '/splash' );
         console.log( 'LOAD TASKS SUCCESS', res );
         dispatch( {
             type: SET_TASKS,
