@@ -13,7 +13,7 @@ function tasksReducer( tasks = { search: '',  tasksList: 'fetching', currentTask
     const { type, payload } = action;
     switch( type ) {
         case SET_TASKS:
-            tasks = updateObject( tasks, { tasksList: payload } );
+            tasks = updateObject( tasks, { tasksList: payload.data } );
             return tasks;
         case REMOVE_TASK:
             return tasks.filter( task => task.id !== payload );
