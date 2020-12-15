@@ -5,10 +5,12 @@ import {
     SET_CURRENT_TASK
 } from './types';
 
+const url = process.env.REACT_APP_BE_URL;
+
 // Load Tasks
 export const loadTasks = () => async dispatch => {
     try {
-        const res = await axios.get( '/splash' );
+        const res = await axios.get( `${ url }/splash` );
         console.log( 'LOAD TASKS SUCCESS', res );
         dispatch( {
             type: SET_TASKS,

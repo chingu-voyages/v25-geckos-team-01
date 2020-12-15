@@ -22,12 +22,15 @@ export const loadUser = () => async dispatch => {
     }
 
     const config = {
-        headers: { authorization: `Bearer ${ localStorage.token && localStorage.token }` }
+        headers: { 
+            authorization: `Bearer ${ localStorage.token && localStorage.token }`,
+            'Content-Type': 'application/json'
+        }
     };
 
     if ( localStorage.token ) {
         try {
-            const res = await axios.get( '/account/', config );
+            const res = await axios.get( `${ process.env.REACT_APP_BE_URL }/account/`, config );
             console.log( 'LOAD USER SUCCESS', res );
             dispatch( {
                 type: USER_LOADED,
@@ -55,7 +58,7 @@ export const register = ( { name, email, role, password, phoneNumber, descriptio
     const body = JSON.stringify( { name, email, role, password, phoneNumber, description, tags, image } );
 
     try {
-        const res = await axios.post( '/auth/register', body, config );
+        const res = await axios.post( `${ process.env.REACT_APP_BE_URL }/auth/register`, body, config );
         console.log( 'REGISTER SUCCESS', res.data )
         dispatch( { 
             type: REGISTER_SUCCESS,
@@ -66,7 +69,7 @@ export const register = ( { name, email, role, password, phoneNumber, descriptio
         } );
         dispatch( loadUser() );
     } catch( err ) {
-        console.log( 'REGISTER FAIL', err.response );
+        console.log( 'REGISTER FAIL', err );
         dispatch( {
             type: SET_ERROR,
             payload: err.response.data[ 'Errors' ]
@@ -86,7 +89,7 @@ export const editUser = ( { name, email, description, tags } ) => async dispatch
     const body = JSON.stringify( { name, email, description, tags } );
 
     try {
-        const res = await axios.put( '/account/', body, config );
+        const res = await axios.put( `${ process.env.REACT_APP_BE_URL }/account/`, body, config );
         console.log( 'EDIT SUCCESS', res )
         dispatch( { 
             type: EDIT_USER_SUCCESS,
@@ -118,7 +121,7 @@ export const login = ( email, password ) => async dispatch => {
     const body = JSON.stringify( { email, password } );
 
     try {
-        const res = await axios.post( '/auth/login', body, config );
+        const res = await axios.post( `${ process.env.REACT_APP_BE_URL }/auth/login`, body, config );
         console.log( 'LOGIN SUCCESS', res.data )
         dispatch( { 
             type: LOGIN_SUCCESS,
@@ -129,7 +132,7 @@ export const login = ( email, password ) => async dispatch => {
         } );
         dispatch( loadUser() );
     } catch( err ) {
-        console.log( 'LOGIN FAIL', err.response )
+        console.log( 'LOGIN FAIL', err )
         dispatch( {
             type: SET_ERROR,
             payload: err.response.data.Errors
@@ -155,7 +158,7 @@ export const deleteUser = () => async  dispatch => {
     };
 
     try {
-        const res = await axios.delete( '/account/', config );
+        const res = await axios.delete( `${ process.env.REACT_APP_BE_URL }/account/`, config );
         console.log( 'DELETE USER', res )
         dispatch( { type: DELETE_USER } );
     } catch( err ) {
