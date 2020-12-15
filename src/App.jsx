@@ -21,6 +21,8 @@ import setAuthToken from './utils/setAuthToken';
 import { loadUser } from './actions/authActions';
 import { loadTasks } from './actions/tasksActions';
 
+console.log(`BE: ${process.env.REACT_APP_BE_URL}`)
+
 if( localStorage.token ) {
   setAuthToken( localStorage.token );
 }
@@ -28,7 +30,7 @@ if( localStorage.token ) {
 const App = ( { auth } ) => {
 
   useEffect( () => {
-    store.dispatch( loadUser() );
+    //store.dispatch( loadUser() );
     store.dispatch( loadTasks() );
   }, [] );
 

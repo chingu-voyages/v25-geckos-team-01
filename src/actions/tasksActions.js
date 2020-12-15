@@ -8,8 +8,8 @@ import {
 // Load Tasks
 export const loadTasks = () => async dispatch => {
     try {
-        const res = await axios.get( '/splash' );
-        console.log( 'LOAD TASKS SUCCESS', res );
+        const res = await axios.get( `${process.env.REACT_APP_BE_URL}/splash` );
+        console.log( 'LOAD TASKS SUCCESS', res.data );
         dispatch( {
             type: SET_TASKS,
             payload: res.data,
